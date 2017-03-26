@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>内容</title>
+    <link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/nav_footer.css"/>
+
+    <style>
+        #comments {
+            margin: 0 auto;
+            padding: 0 0 20px;
+        }
+
+        #active-content {
+            text-indent: 2em;
+        }
+
+        #div-comment {
+            padding: 0 10px;
+            border-top: 1px solid black;
+        }
+
+        #comment-area {
+            margin: 20px 0 0;
+            border-top: 1px solid #B3B3B3;
+        }
+
+        #comment-area li {
+            border-top: 1px solid #eee;
+            padding: 10px 5px 5px;
+        }
+
+        #but-collection {
+            outline: none;
+            float: right;
+            width: 80px;
+        }
+
+        /*#but-comeback a {
+            text-decoration: none;
+            color: white;
+        }*/
+
+        #but-submit {
+            width: 50px;
+            padding: 3px;
+            background-color: #568BB9;
+            border: 1px solid #285e8e;
+            border-radius: 4px;
+            color: white;
+        }
+
+        #but-submit:hover {
+            background-color: #437EB1;
+        }
+
+        #but-submit:active {
+            background-color: #3071A9;
+        }
+
+        #comments span {
+            margin: 0 5px;
+        }
+
+        #but-loadmore {
+            display: block;
+            width: 80px;
+            padding: 3px;
+            margin: 0 auto;
+        }
+
+        #comments li {
+            list-style: none;
+        }
+
+        #text-comment {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">精品课</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">课程中心 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="list.html">全部课程</a>
+                            </li>
+                            <li>
+                                <a href="#">Springboot框架学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Web 前端学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Web 后端学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Android 学习</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#about">互动交流</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search"/>
+                    </div>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" style="padding: 5px;">
+                            <img src="img/1 (5).jpg" style="width:40px;height: 40px;border-radius: 50%;"/>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Action</a>
+                            </li>
+                            <li>
+                                <a href="#">Another action</a>
+                            </li>
+                            <li>
+                                <a href="#">Something else here</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="my-border container-fluid">
+        <button id="but-collection" class="btn btn-default">收藏</button>
+        <!--<textarea style="display:none" name="mdContent" th:text="${article.mdContent}"></textarea>-->
+        <div id="content"></div>
+        <div id="comments" class="container">
+            <div id="div-comment">
+                <p>评论人：<span>小米</span></p>
+                <textarea id="text-comment" name="comment" rows="4" placeholder="180字内"></textarea>
+                <br/>
+                <button id="but-submit">提交</button>
+                <div id="comment-area">
+                    <h4>评论:</h4>
+                    <ul>
+                        <li>
+                            <p><span>小明:</span>评论内容</p>
+                        </li>
+                        <li>
+                            <p><span>小明:</span>评论内容</p>
+                        </li>
+                        <li>
+                            <p><span>小明:</span>评论内容</p>
+                        </li>
+                        <li>
+                            <p><span>小明:</span>评论内容</p>
+                        </li>
+                        <li>
+                            <p><span>小明:</span>评论内容</p>
+                        </li>
+                    </ul>
+                    <button id="but-loadmore">加载更多</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <p>
+        联系方式</p>
+    <p>
+        QQ/微信：XXXXXXXXXX</p>
+    <p>
+        邮箱：XXXXXXXXXX@163.com</p>
+    <p>
+        版权所有&#169;广州商学院14级商软1班无名小组-2017
+    </p>
+</footer>
+<script src="vendor/bootstrap-3.3.7-dist/js/jquery-3.1.1.js"></script>
+<script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/arttemplate.js"></script>
+<script id="article" type="text/html">
+    <div class="page-header">
+        <h1 style="text-align: center;">{{title}}</h1>
+        <p style="text-align: center;" class="info">
+            作者:
+            <a title="点评数" href="#comment-div"><span class="fa fa-comments-o">&nbsp;{{author}}</span></a>
+            <span title="发布日期" class="fa fa-clock-o">&nbsp;{{publishedTime}}</span> &nbsp;
+
+            <span title="访问量" class="fa fa-eye">&nbsp;1382</span> &nbsp;
+            <a title="点评数" href="#comment-div"><span class="fa fa-comments-o">&nbsp;3</span></a>
+            <span class="label label-default">Default</span>
+            <span class="label label-primary">Primary</span>
+            <span class="label label-success">Success</span>
+        </p>
+    </div>
+
+    <div class="article-content">
+        {{#content}}
+    </div>
+</script>
+
+<script>
+    /*收藏*/
+    $("#but-collection").click(function () {
+        if ($(this).text() === "收藏") {
+            $(this).html("已收藏").attr('title', "取消收藏");
+            $(this).removeClass().addClass("btn btn-warning");
+        } else {
+            $(this).html("收藏").attr('title', "");
+            $(this).removeClass().addClass("btn btn-default");
+        }
+    });
+    /*评论*/
+    $("#but-submit").click(function () {
+        $("#text-comment").val("");
+        /*清空*/
+    });
+    /*获取数据*/
+    fetch("/article/get", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "id=ac567d66-4852-4ce4-97a6-3c41760591f6"
+    }).then(
+        function (response) {
+            if (response.status !== 200) {
+                console.log("存在一个问题，状态码为：" + response.status);
+                return;
+            }
+            //检查响应文本
+            response.json().then(function (data) {
+                console.log(data);
+                /*模板*/
+                var testData = {
+                    title: data.title,
+                    publishedTime: data.publishedTime,
+                    author: data.author,
+                    content: data.htmlContent
+                };
+                var html = template('article', testData);
+                document.getElementById('content').innerHTML = html;
+            });
+        }
+    )
+        .catch(function (err) {
+            console.log("Fetch错误:" + err);
+        });
+</script>
+</body>
+
+</html>

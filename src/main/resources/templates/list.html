@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>Springboot框架学习</title>
+    <link rel="stylesheet" href="vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="vendor/bootstrap-treeview-master/dist/bootstrap-treeview.min.css"/>
+    <link rel="stylesheet" href="css/nav_footer.css"/>
+</head>
+
+<body>
+<div class="navbar-wrapper">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">精品课</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">课程中心 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li class="active">
+                                <a href="list.html">全部课程</a>
+                            </li>
+                            <li>
+                                <a href="#">Springboot框架学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Web 前端学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Web 后端学习</a>
+                            </li>
+                            <li>
+                                <a href="#">Android 学习</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#about">互动交流</a>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search"/>
+                    </div>
+                    <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false" style="padding: 5px;">
+                            <img src="img/1 (5).jpg" style="width:40px;height: 40px;border-radius: 50%;"/>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">Action</a>
+                            </li>
+                            <li>
+                                <a href="#">Another action</a>
+                            </li>
+                            <li>
+                                <a href="#">Something else here</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">Separated link</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div id="treeview1" class="treeview">
+            </div>
+        </div>
+        <div class="col-md-9" style="padding-top: 40px;">
+            <!-- 修改列表方式 -->
+            <div class="btn-group" style="float: right;margin-top: -40px;">
+                <button id="change-show" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    排列方式&nbsp;
+                    <span class="glyphicon glyphicon-align-justify"></span>
+                    <!--  <span class="caret"></span>-->
+                </button>
+                <ul class="dropdown-menu" id="select-show" style="min-width: 104px;">
+                    <li>
+                        <a href="#" data-id="my-list">列表&nbsp;
+                            <span class="glyphicon glyphicon-align-justify"></span></a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="my-grid">方格&nbsp;&nbsp;<span
+                                class="glyphicon glyphicon-th-large"></span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!--方格-->
+
+            <div class="row all-data" id="my-grid" style="display: none;">
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span>
+                            </p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span></p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span></p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span></p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span></p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="img/1 (6).jpg" alt="..."/>
+                        <div class="caption">
+                            <h3>HTML</h3>
+                            <p>标签:<span class="label label-default">Default</span>
+                                <span class="label label-primary">Primary</span>
+                                <span class="label label-success">Success</span>
+                                <span class="label label-info">Info</span>
+                                <span class="label label-warning">Warning</span>
+                                <span class="label label-danger">Danger</span></p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam magnam soluta aut
+                                harum ex asperiores eos necessitatibus similique placeat praesentium obcaecati labore
+                                natus sit animi accusamus? Odio laborum eos quas?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--方格end-->
+
+            <!--列表-->
+            <div class="row all-data" id="my-list">
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="content.html">html基础</a></h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="media-body">
+                        <h4 class="media-heading">html基础</h4>
+                        <span class="label label-default">前端</span>
+                        <span class="label label-primary">基础</span>
+                        <span class="label label-success">简单</span>
+                        <span class="label label-info">推荐</span>
+                        <span class="label label-warning">进阶</span>
+                        <span class="label label-danger">困难</span>
+                        <p> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
+                            commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit. Fugit similique ex modi praesentium vitae
+                            ipsam debitis dolorem eius repudiandae esse adipisci eaque possimus vel totam culpa
+                            provident illo quae at! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit
+                            similique ex modi praesentium vitae ipsam debitis dolorem eius repudiandae esse adipisci
+                            eaque possimus vel totam culpa provident illo quae at!</p>
+                    </div>
+                    <div class="media-right">
+                        <a href="#">
+                            <img class="media-object" data-src="holder.js/64x64" alt="..." src="img/1 (1).jpeg"
+                                 data-holder-rendered="true" style="margin-top:49px;width: 128px; height: 128px;"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--列表end-->
+        </div>
+
+    </div>
+    <nav aria-label="Page navigation" style="text-align: center;">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li>
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">4</a>
+            </li>
+            <li>
+                <a href="#">5</a>
+            </li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<footer>
+    <p>
+        联系方式</p>
+    <p>
+        QQ/微信：XXXXXXXXXX</p>
+    <p>
+        邮箱：XXXXXXXXXX@163.com</p>
+    <p>
+        版权所有&#169;广州商学院14级商软1班无名小组-2017
+    </p>
+</footer>
+
+<script src="vendor/bootstrap-3.3.7-dist/js/jquery-3.1.1.js"></script>
+<script src="vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vendor/bootstrap-treeview-master/dist/bootstrap-treeview.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#select-show').find('li').on("click", function () {
+            var $a = $(this).children('a');
+            $(".all-data").hide();
+            $('#' + $a.attr('data-id')).show();
+            $("#change-show").children('span').removeClass().addClass($a.children('span').attr('class'));
+        });
+
+        var defaultData = [{
+            text: '前端',
+            href: '#parent1',
+            tags: ['4'],
+            nodes: [{
+                text: 'html/css',
+                href: '#child1',
+                tags: ['0'],
+                nodes: [{
+                    text: 'html5',
+                    href: '#grandchild1',
+                    tags: ['0']
+                },
+                    {
+                        text: 'css',
+                        href: '#grandchild2',
+                        tags: ['0']
+                    }
+                ]
+            },
+                {
+                    text: 'javascript',
+                    href: '#child2',
+                    tags: ['0']
+                }
+            ]
+        },
+            {
+                text: '后端',
+                href: '#parent2',
+                tags: ['0']
+            },
+            {
+                text: '数据挖掘',
+                href: '#parent3',
+                tags: ['0']
+            },
+            {
+                text: 'UI设计',
+                href: '#parent4',
+                tags: ['0']
+            },
+            {
+                text: 'UX设计',
+                href: '#parent5',
+                tags: ['0']
+            }
+        ];
+
+        $('#treeview1').treeview({
+            data: defaultData,
+            levels: 1
+        });
+    })
+</script>
+</body>
+
+</html>
