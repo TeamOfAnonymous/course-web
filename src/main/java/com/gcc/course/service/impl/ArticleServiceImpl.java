@@ -51,6 +51,9 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = null;
         try {
             article = articleRepository.findOne(id);
+            //数据库字段属性为mediumblob，需要改变编码
+            article.setHtmlContent(new String(article.getHtmlContent().getBytes("iso-8859-1"),"UTF-8"));
+            article.setMdContent(new String(article.getMdContent().getBytes("iso-8859-1"),"UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
