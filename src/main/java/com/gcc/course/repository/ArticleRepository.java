@@ -42,13 +42,12 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
      *
      * @param id
      * @param author
-     * @param htmlContent
      * @param mdContent
      * @param title
      * @param session
      */
     @Modifying
     @Transactional
-    @Query("update Article a set a.author = ?2,a.htmlContent = ?3,a.mdContent = ?4,a.title = ?5,a.session = ?6 where a.id = ?1")
-    void update(String id, String author, String htmlContent, String mdContent, String title, Session session);
+    @Query("update Article a set a.author = ?2,a.mdContent = ?3,a.title = ?4,a.session = ?5 where a.id = ?1")
+    void update(String id, String author, String mdContent, String title, Session session);
 }

@@ -25,8 +25,8 @@ public class Article {
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDateTime publishedTime; //发表时间
 
+    @Column(length = 16777216)
     private String mdContent; //正文md格式
-    private String htmlContent; //正文html格式
 
     @ManyToOne
     private Session session; //所属章节
@@ -80,14 +80,6 @@ public class Article {
 
     public void setMdContent(String mdContent) {
         this.mdContent = mdContent;
-    }
-
-    public String getHtmlContent() {
-        return htmlContent;
-    }
-
-    public void setHtmlContent(String htmlContent) {
-        this.htmlContent = htmlContent;
     }
 
     public Session getSession() {

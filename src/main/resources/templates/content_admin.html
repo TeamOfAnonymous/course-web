@@ -129,7 +129,6 @@
         var dataStr = {
             "title": $("#title").val(),
             "mdContent": testEditor.getMarkdown(),
-            "htmlContent": testEditor.getHTML(),
         };
         console.log(JSON.stringify(dataStr));
         $.ajax({
@@ -139,7 +138,8 @@
             data:JSON.stringify(dataStr),
             dataType: "json",
             success: function (data) {
-                alert("发表成功");
+                alert(data);
+                console.log(data);
             },
             error: function (error) {
                 alert("发表失败");

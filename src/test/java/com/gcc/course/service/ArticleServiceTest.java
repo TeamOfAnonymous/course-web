@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.greaterThan;
 @SpringBootTest
 //按方法定义顺序执行测试方法
 @FixMethodOrder(MethodSorters.DEFAULT)
-public class ArticleServiceImpTest {
+public class ArticleServiceTest {
 
     @Autowired
     private ArticleService articleService;
@@ -33,8 +33,7 @@ public class ArticleServiceImpTest {
     @Test
     public void testSave() {
         Article article = new Article();
-        boolean save = articleService.save(article);
-        Assert.assertThat(save,is(true));
+        article = articleService.save(article);
     }
 
     /**

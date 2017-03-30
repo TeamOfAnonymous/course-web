@@ -30,13 +30,13 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public boolean save(Article article) {
+    public Article save(Article article) {
         try {
-            articleRepository.save(article);
+            article = articleRepository.save(article);
+            return article;
         } catch (Exception e) {
-            return false;
-        } finally {
-            return true;
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -51,9 +51,6 @@ public class ArticleServiceImpl implements ArticleService {
         Article article = null;
         try {
             article = articleRepository.findOne(id);
-            //数据库字段属性为mediumblob，需要改变编码
-            article.setHtmlContent(new String(article.getHtmlContent().getBytes("iso-8859-1"),"UTF-8"));
-            article.setMdContent(new String(article.getMdContent().getBytes("iso-8859-1"),"UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -90,7 +87,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean update(Article article) {
         try {
-            articleRepository.update(article.getId(), article.getAuthor(), article.getHtmlContent(), article.getMdContent(), article.getTitle(), article.getSession());
+            articleRepository.update(article.getId(), article.getAuthor(), article.getMdContent(), article.getTitle(), article.getSession());
         } catch (Exception e) {
             return false;
         } finally {

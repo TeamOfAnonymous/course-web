@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    boolean save(Article article);
+    Article save(Article article);
 
     Article get(String id);
 

@@ -23,7 +23,7 @@ public class ArticleAdminController {
 
     @PostMapping
     @ApiOperation(value = "保存文章")
-    public boolean save(@RequestBody Article article) {
+    public Article save(@RequestBody Article article) {
         return articleServiceImpl.save(article);
     }
 
