@@ -4,13 +4,15 @@ package com.gcc.course.utils;
  * Created by huangMP on 2017/3/13.
  * decription :
  */
-public class EditorImageResult {
+public class RequestResult {
 
     private int success ;
     private String message ;
     private String url ;
 
-    public EditorImageResult() {
+    private Object object;
+
+    public RequestResult() {
         this.success = 0;
         this.message = "图片上传失败!";
         this.url = "";
@@ -38,5 +40,13 @@ public class EditorImageResult {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Object getObject() {
+        return object;
+    }
+
+    public void setObject(Object object) {
+        this.object = object;
     }
 }
