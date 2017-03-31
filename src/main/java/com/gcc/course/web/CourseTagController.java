@@ -14,42 +14,11 @@ import java.util.List;
  * decription :
  */
 @RestController
-@RequestMapping("admin/coursetag")
-@Api(value = "标签的后台管理Controller")
+@RequestMapping("/coursetag")
+@Api(value = "标签的管理Controller")
 public class CourseTagController {
 
     @Autowired
     private CourseTagService courseTagServiceImpl;
-
-
-    @PostMapping
-    @ApiOperation(value = "保存标签")
-    public CourseTag save(@RequestBody CourseTag courseTag) {
-        return courseTagServiceImpl.save(courseTag);
-    }
-
-    @PutMapping
-    @ApiOperation(value = "更新标签")
-    public CourseTag update(@RequestBody CourseTag courseTag) {
-        return courseTagServiceImpl.update(courseTag);
-    }
-
-    @DeleteMapping("{id}")
-    @ApiOperation(value = "删除标签")
-    public boolean delete(@PathVariable String id) {
-        return courseTagServiceImpl.remove(id);
-    }
-
-    @GetMapping("{id}")
-    @ApiOperation(value = "获取标签")
-    public CourseTag get(@PathVariable String id) {
-        return courseTagServiceImpl.get(id);
-    }
-
-    @GetMapping("getAll")
-    @ApiOperation(value = "获取所有标签")
-    public List<CourseTag> getAll() {
-        return courseTagServiceImpl.findAll();
-    }
 
 }
