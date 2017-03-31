@@ -30,24 +30,23 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
      *
      * @param id
      * @param deletedTime
-     * @param is_deleted
+     * @param status
      */
     @Modifying
     @Transactional
-    @Query("update Article a set a.deletedTime = ?2,a.is_deleted = ?3 where a.id = ?1")
-    void update(String id, LocalDateTime deletedTime, int is_deleted);
+    @Query("update Article a set a.deletedTime = ?2,a.status = ?3 where a.id = ?1")
+    void update(String id, LocalDateTime deletedTime, int status);
 
     /**
      * 根据id修改基本信息
      *
      * @param id
-     * @param author
      * @param mdContent
      * @param title
      * @param session
      */
     @Modifying
     @Transactional
-    @Query("update Article a set a.author = ?2,a.mdContent = ?3,a.title = ?4,a.session = ?5 where a.id = ?1")
-    void update(String id, String author, String mdContent, String title, Session session);
+    @Query("update Article a set a.mdContent = ?2,a.title = ?3,a.session = ?4 where a.id = ?1")
+    Article update(String id, String mdContent, String title, Session session);
 }

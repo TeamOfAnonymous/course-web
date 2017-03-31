@@ -42,10 +42,10 @@ public interface UserRepository extends JpaRepository<User, String> {
      * 根据用户id修改删除时间和删除状态
      * @param id
      * @param deletedTime
-     * @param is_deleted
+     * @param status
      */
     @Modifying
     @Transactional
-    @Query("update User u set u.deletedTime = ?2,u.is_deleted = ?3,u.authority = ?4  where u.id = ?1")
-    void update(String id, LocalDateTime deletedTime, int is_deleted);
+    @Query("update User u set u.deletedTime = ?2,u.status = ?3 where u.id = ?1")
+    void update(String id, LocalDateTime deletedTime, int status);
 }

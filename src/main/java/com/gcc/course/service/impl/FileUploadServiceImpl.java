@@ -3,9 +3,9 @@ package com.gcc.course.service.impl;
 import com.gcc.course.domain.Image;
 import com.gcc.course.repository.ImageRepository;
 import com.gcc.course.service.FileUploadService;
-import com.gcc.course.utils.EditorImageResult;
 import com.gcc.course.utils.FileUploadUtil;
 import com.gcc.course.utils.Md5Util;
+import com.gcc.course.utils.RequestResult;
 import com.gcc.course.utils.UuidUtil;
 import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +37,17 @@ public class FileUploadServiceImpl implements FileUploadService {
      * @return
      */
     @Override
-    public EditorImageResult imageUpload(MultipartFile multipartFile) {
-        EditorImageResult editorImageResult = new EditorImageResult();
+    public RequestResult imageUpload(MultipartFile multipartFile) {
+        RequestResult requestResult = new RequestResult();
         String url = findByMd5Str(multipartFile);
         if (url == null || "".equals(url)) {
-            editorImageResult = imageUpload(multipartFile, editorImageResult);
+            requestResult = imageUpload(multipartFile, requestResult);
         } else {
-            editorImageResult.setSuccess(0);
-            editorImageResult.setMessage("图片已存在,是否使用已存在的照片？");
-            editorImageResult.setUrl(url);
+            requestResult.setSuccess(0);
+            requestResult.setMessage("图片已存在,是否使用已存在的照片？");
+            requestResult.setUrl(url);
         }
-        return editorImageResult;
+        return requestResult;
     }
 
     /**
@@ -57,10 +57,10 @@ public class FileUploadServiceImpl implements FileUploadService {
      * @return
      */
     @Override
-    public EditorImageResult imageUploadAgain(MultipartFile multipartFile) {
-        EditorImageResult editorImageResult = new EditorImageResult();
-        editorImageResult = imageUpload(multipartFile, editorImageResult);
-        return editorImageResult;
+    public RequestResult imageUploadAgain(MultipartFile multipartFile) {
+        RequestResult requestResult = new RequestResult();
+        requestResult = imageUpload(multipartFile, requestResult);
+        return requestResult;
     }
 
     /**
@@ -90,10 +90,10 @@ public class FileUploadServiceImpl implements FileUploadService {
      * 对文件进行删除并保存相应的信息
      *
      * @param multipartFile
-     * @param editorImageResult
+     * @param requestResult
      * @return
      */
-    private EditorImageResult imageUpload(MultipartFile multipartFile, EditorImageResult editorImageResult) {
+    private RequestResult imageUpload(MultipartFile multipartFile, RequestResult requestResult) {
         String newName = UuidUtil.get32UUID();
         String url = null;
         String md5_string = null;
@@ -104,14 +104,14 @@ public class FileUploadServiceImpl implements FileUploadService {
             image.setImageUrl(url);
             image.setMd5Str(md5_string);
             imageRepository.save(image);
-            editorImageResult.setSuccess(1);
-            editorImageResult.setMessage("上传成功");
-            editorImageResult.setUrl(url);
+            requestResult.setSuccess(1);
+            requestResult.setMessage("上传成功");
+            requestResult.setUrl(url);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return editorImageResult;
+        return requestResult;
     }
 }

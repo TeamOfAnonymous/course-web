@@ -6,6 +6,7 @@ import com.gcc.course.domain.Article;
 import com.gcc.course.repository.SessionRepository;
 import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.SessionService;
+import com.gcc.course.utils.RequestResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +31,18 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public Article save(Article article) {
-        try {
+    public RequestResult save(Article article) {
+        RequestResult requestResult = new RequestResult();
+        if (article.getId() == null || "".equals(article.getId())){
             article = articleRepository.save(article);
-            return article;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            requestResult.setSuccess(1);
+            requestResult.setMessage("文章保存成功");
+            requestResult.setObject(article);
+        } else {
+            requestResult.setSuccess(0);
+            requestResult.setMessage("文章保存失败，该文章已存在");
         }
+        return requestResult;
     }
 
     /**
@@ -85,13 +90,18 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public boolean update(Article article) {
+    public RequestResult update(Article article) {
+        RequestResult requestResult = new RequestResult();
         try {
-            articleRepository.update(article.getId(), article.getAuthor(), article.getMdContent(), article.getTitle(), article.getSession());
+            articleRepository.update(article.getId(), article.getMdContent(), article.getTitle(), article.getSession());
+            requestResult.setSuccess(1);
+            requestResult.setMessage("文章修改成功");
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            requestResult.setSuccess(0);
+            requestResult.setMessage("文章修改失败");
         } finally {
-            return true;
+            return requestResult;
         }
     }
 

@@ -2,6 +2,7 @@ package com.gcc.course.web;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.service.ArticleService;
+import com.gcc.course.utils.RequestResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ public class ArticleAdminController {
 
     @PostMapping
     @ApiOperation(value = "保存文章")
-    public Article save(@RequestBody Article article) {
+    public RequestResult save(@RequestBody Article article) {
         return articleServiceImpl.save(article);
     }
 
     @PutMapping
     @ApiOperation(value = "更新文章")
-    public boolean update(@RequestBody Article article) {
+    public RequestResult update(@RequestBody Article article) {
         return articleServiceImpl.update(article);
     }
 

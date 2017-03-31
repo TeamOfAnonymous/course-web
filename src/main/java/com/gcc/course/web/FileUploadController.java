@@ -1,8 +1,8 @@
 package com.gcc.course.web;
 
 import com.gcc.course.service.FileUploadService;
-import com.gcc.course.utils.EditorImageResult;
 import com.gcc.course.utils.Md5Util;
+import com.gcc.course.utils.RequestResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +28,16 @@ public class FileUploadController {
     @PostMapping
     @ApiOperation(value = "上传单个图片")
     public MappingJacksonValue imageUpload(@RequestParam("editormd-image-file") MultipartFile multipartFile) {
-        EditorImageResult editorImageResult = fileUploadServiceImpl.imageUpload(multipartFile);
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(editorImageResult);
+        RequestResult requestResult = fileUploadServiceImpl.imageUpload(multipartFile);
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(requestResult);
         return mappingJacksonValue;
     }
 
     @PostMapping("again")
     @ApiOperation(value = "再次上传单个图片")
     public MappingJacksonValue imageUploadAgain(@RequestParam("editormd-image-file") MultipartFile multipartFile) {
-        EditorImageResult editorImageResult = fileUploadServiceImpl.imageUploadAgain(multipartFile);
-        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(editorImageResult);
+        RequestResult requestResult = fileUploadServiceImpl.imageUploadAgain(multipartFile);
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(requestResult);
         return mappingJacksonValue;
     }
 
