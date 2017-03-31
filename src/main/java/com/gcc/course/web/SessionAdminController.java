@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("admin/session")
-@Api(value = "课时的后台管理Controller")
+@Api(value = "章节的后台管理Controller")
 public class SessionAdminController {
 
     @Autowired
     private SessionService sessionServiceImpl;
+
+
 }
