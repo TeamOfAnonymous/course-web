@@ -14,14 +14,9 @@ import java.util.UUID;
  * 文章实体类
  */
 @Entity
-public class Article {
-
-    @Id
-    @GeneratedValue(generator = "UUID2_GENERATOR")
-    private String id;
+public class Article extends BaseEntity {
 
     private String title;//标题
-    private String author;//作者
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDateTime publishedTime; //发表时间
 
@@ -31,15 +26,8 @@ public class Article {
     @ManyToOne
     private Session session; //所属章节
 
-    @Column(columnDefinition = "INT default 0")
-    private int is_deleted; //是否被删除，1为true，0为false；
-
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    private LocalDateTime deletedTime; //删除时间
-
     public Article() {
         this.publishedTime = LocalDateTime.now();
-        this.is_deleted = 0;
     }
 
     public String getId() {
@@ -56,14 +44,6 @@ public class Article {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public LocalDateTime getPublishedTime() {
@@ -89,22 +69,5 @@ public class Article {
     public void setSession(Session session) {
         this.session = session;
     }
-
-    public int getIs_deleted() {
-        return is_deleted;
-    }
-
-    public void setIs_deleted(int is_deleted) {
-        this.is_deleted = is_deleted;
-    }
-
-    public LocalDateTime getDeletedTime() {
-        return deletedTime;
-    }
-
-    public void setDeletedTime(LocalDateTime deletedTime) {
-        this.deletedTime = deletedTime;
-    }
-
 
 }

@@ -12,11 +12,7 @@ import java.time.LocalDateTime;
  * Created by WangZK on 2017/3/20.
  */
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue(generator = "UUID2_GENERATOR")
-    private String id;
+public class User extends BaseEntity {
 
     private String userName;
     private String password;
@@ -25,24 +21,10 @@ public class User {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime addTime; //添加用户的时间
 
-    @Column(columnDefinition = "INT default 0")
-    private int is_deleted; //是否被删除，1为true，0为false
-
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-    private LocalDateTime deletedTime; //删除用户的时间
-
     public User() {
         this.addTime = LocalDateTime.now();
-        this.is_deleted = 0;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUserName() {
         return userName;
@@ -76,19 +58,4 @@ public class User {
         this.addTime = addTime;
     }
 
-    public int getIs_deleted() {
-        return is_deleted;
-    }
-
-    public void setIs_deleted(int is_deleted) {
-        this.is_deleted = is_deleted;
-    }
-
-    public LocalDateTime getDeletedTime() {
-        return deletedTime;
-    }
-
-    public void setDeletedTime(LocalDateTime deletedTime) {
-        this.deletedTime = deletedTime;
-    }
 }
