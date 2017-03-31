@@ -6,7 +6,7 @@ import com.gcc.course.domain.Article;
 import com.gcc.course.repository.SessionRepository;
 import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.SessionService;
-import com.gcc.course.utils.RequestResult;
+import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,18 +31,18 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public RequestResult save(Article article) {
-        RequestResult requestResult = new RequestResult();
+    public WebResult save(Article article) {
+        WebResult webResult = new WebResult();
         if (article.getId() == null || "".equals(article.getId())){
             article = articleRepository.save(article);
-            requestResult.setSuccess(1);
-            requestResult.setMessage("文章保存成功");
-            requestResult.setObject(article);
+            webResult.setStatus(1);
+            webResult.setMsg("文章保存成功");
+            webResult.setData(article);
         } else {
-            requestResult.setSuccess(0);
-            requestResult.setMessage("文章保存失败，该文章已存在");
+            webResult.setStatus(0);
+            webResult.setMsg("文章保存失败，该文章已存在");
         }
-        return requestResult;
+        return webResult;
     }
 
     /**
@@ -90,18 +90,18 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     @Override
-    public RequestResult update(Article article) {
-        RequestResult requestResult = new RequestResult();
+    public WebResult update(Article article) {
+        WebResult webResult = new WebResult();
         try {
             articleRepository.update(article.getId(), article.getMdContent(), article.getTitle(), article.getSession());
-            requestResult.setSuccess(1);
-            requestResult.setMessage("文章修改成功");
+            webResult.setStatus(1);
+            webResult.setMsg("文章修改成功");
         } catch (Exception e) {
             e.printStackTrace();
-            requestResult.setSuccess(0);
-            requestResult.setMessage("文章修改失败");
+            webResult.setStatus(0);
+            webResult.setMsg("文章修改失败");
         } finally {
-            return requestResult;
+            return webResult;
         }
     }
 
