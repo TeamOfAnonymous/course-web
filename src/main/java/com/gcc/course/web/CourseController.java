@@ -15,42 +15,11 @@ import java.util.List;
  * decription :
  */
 @RestController
-@RequestMapping("admin/course")
+@RequestMapping("/course")
 @Api(value = "课程的后台管理Controller")
 public class CourseController {
 
     @Autowired
     private CourseService courseServiceImpl;
-
-
-    @PostMapping
-    @ApiOperation(value = "保存课程")
-    public Course save(@RequestBody Course course) {
-        return courseServiceImpl.save(course);
-    }
-
-    @PutMapping
-    @ApiOperation(value = "更新课程")
-    public Course update(@RequestBody Course course) {
-        return courseServiceImpl.update(course);
-    }
-
-    @DeleteMapping("{id}")
-    @ApiOperation(value = "删除课程")
-    public boolean delete(@PathVariable String id) {
-        return courseServiceImpl.remove(id);
-    }
-
-    @GetMapping("{id}")
-    @ApiOperation(value = "获取课程")
-    public Course get(@PathVariable String id) {
-        return courseServiceImpl.get(id);
-    }
-
-    @GetMapping("getAll")
-    @ApiOperation(value = "获取所有课程")
-    public List<Course> getAll() {
-        return courseServiceImpl.findAll();
-    }
 
 }
