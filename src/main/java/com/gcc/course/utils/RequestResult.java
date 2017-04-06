@@ -9,7 +9,6 @@ public class RequestResult {
     private int success ;
     private String message ;
     private String url ;
-
     private Object object;
 
     public RequestResult() {
