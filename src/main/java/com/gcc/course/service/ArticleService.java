@@ -2,7 +2,7 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Session;
-import com.gcc.course.utils.RequestResult;
+import com.gcc.course.utils.WebResult;
 
 import java.util.List;
 
@@ -11,13 +11,13 @@ import java.util.List;
  */
 public interface ArticleService {
 
-    RequestResult save(Article article);
+    WebResult save(Article article);
 
     Article get(String id);
 
     List<Article> getArticleList(String id);
 
-    RequestResult update(Article article);
+    WebResult update(Article article);
 
     boolean remove(String id);
 

@@ -21,6 +21,7 @@ public class Article extends BaseEntity {
     private LocalDateTime publishedTime; //发表时间
 
     @Column(length = 16777216)
+    //@Column(columnDefinition = "longtext") //columnDefinition不推荐使用，因为可能导致移植性不好，各个数据库不兼容等。
     private String mdContent; //正文md格式
 
     @ManyToOne
@@ -28,14 +29,6 @@ public class Article extends BaseEntity {
 
     public Article() {
         this.publishedTime = LocalDateTime.now();
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getTitle() {

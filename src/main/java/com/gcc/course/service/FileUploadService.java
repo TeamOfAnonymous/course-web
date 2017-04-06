@@ -1,6 +1,6 @@
 package com.gcc.course.service;
 
-import com.gcc.course.utils.RequestResult;
+import com.gcc.course.utils.EditerImageResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface FileUploadService {
 
-    RequestResult imageUpload(MultipartFile multipartFile);
+    EditerImageResult imageUpload(MultipartFile multipartFile);
 
-    RequestResult imageUploadAgain(MultipartFile multipartFile);
+    EditerImageResult imageUploadAgain(MultipartFile multipartFile);
 
 }
