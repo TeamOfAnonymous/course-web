@@ -27,9 +27,6 @@ public class Section extends BaseEntity {
     @ManyToOne
     private Course course;
 
-    @OneToMany
-    private List<Article> articles;
-
     @ManyToMany
     private Set<Tag> tags  = new HashSet<>();
 
@@ -75,14 +72,6 @@ public class Section extends BaseEntity {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
     }
 
     public Set<Tag> getTags() {
