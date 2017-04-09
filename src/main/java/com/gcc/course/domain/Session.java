@@ -25,9 +25,6 @@ public class Session extends BaseEntity {
     @ManyToOne
     private Course course;
 
-    @OneToMany
-    private List<Article> articles;
-
     public Session() {
         this.addTime = LocalDateTime.now();
     }
@@ -72,11 +69,4 @@ public class Session extends BaseEntity {
         this.course = course;
     }
 
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
 }
