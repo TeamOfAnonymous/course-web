@@ -64,9 +64,9 @@ public class LinkController {
     }
 
     @ApiOperation(value = "跳转到后台课时页面")
-    @GetMapping(value = "goAdminSession")
-    public String goAdminSession() {
-        return "session_admin";
+    @GetMapping(value = "goAdminSection")
+    public String goAdminSection() {
+        return "section_admin";
     }
 
     @ApiOperation(value = "跳转到后台首页")

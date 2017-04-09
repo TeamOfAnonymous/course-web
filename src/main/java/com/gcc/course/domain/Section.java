@@ -5,19 +5,21 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by WangZK on 2017/3/20.
  * decription : 章节实体
  */
 @Entity
-public class Session extends BaseEntity {
+public class Section extends BaseEntity {
 
     private String name; // 名称
     private String description; // 简介
 
-    private int sort_order ; // 排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
+    private int orderIndex; // 排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
 
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDateTime addTime; // 添加时间
@@ -28,7 +30,10 @@ public class Session extends BaseEntity {
     @OneToMany
     private List<Article> articles;
 
-    public Session() {
+    @ManyToMany
+    private Set<Tag> tags  = new HashSet<>();
+
+    public Section() {
         this.addTime = LocalDateTime.now();
     }
 
@@ -48,12 +53,12 @@ public class Session extends BaseEntity {
         this.description = description;
     }
 
-    public int getSort_order() {
-        return sort_order;
+    public int getOrderIndex() {
+        return orderIndex;
     }
 
-    public void setSort_order(int sort_order) {
-        this.sort_order = sort_order;
+    public void setOrderIndex(int orderIndex) {
+        this.orderIndex = orderIndex;
     }
 
     public LocalDateTime getAddTime() {
@@ -78,5 +83,13 @@ public class Session extends BaseEntity {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

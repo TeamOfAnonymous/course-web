@@ -1,7 +1,7 @@
 package com.gcc.course.repository;
 
 import com.gcc.course.domain.Article;
-import com.gcc.course.domain.Session;
+import com.gcc.course.domain.Section;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,10 +20,10 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
     /**
      * 通过父节点查找文章
      *
-     * @param session
+     * @param section
      * @return
      */
-    List<Article> findBySession(Session session);
+    List<Article> findBySection(Section section);
 
     /**
      * 根据id修改删除时间和删除状态
@@ -43,10 +43,10 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
      * @param id
      * @param mdContent
      * @param title
-     * @param session
+     * @param section
      */
     @Modifying
     @Transactional
-    @Query("update Article a set a.mdContent = ?2,a.title = ?3,a.session = ?4 where a.id = ?1")
-    Article update(String id, String mdContent, String title, Session session);
+    @Query("update Article a set a.mdContent = ?2,a.title = ?3,a.section = ?4 where a.id = ?1")
+    Article update(String id, String mdContent, String title, Section section);
 }

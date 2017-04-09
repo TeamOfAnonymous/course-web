@@ -1,11 +1,10 @@
 package com.gcc.course.service.impl;
 
-import com.gcc.course.domain.Session;
+import com.gcc.course.domain.Section;
 import com.gcc.course.repository.ArticleRepository;
 import com.gcc.course.domain.Article;
-import com.gcc.course.repository.SessionRepository;
 import com.gcc.course.service.ArticleService;
-import com.gcc.course.service.SessionService;
+import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
     @Autowired
-    private SessionService sessionServiceImpl;
+    private SectionService sectionServiceImpl;
 
     /**
      * 创建文章
@@ -72,9 +71,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getArticleList(String id) {
         List<Article> articles = null;
         try {
-            Session session = sessionServiceImpl.get(id);
-            if (session != null) {
-                articles = articleRepository.findBySession(session);
+            Section section = sectionServiceImpl.get(id);
+            if (section != null) {
+                articles = articleRepository.findBySection(section);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +92,7 @@ public class ArticleServiceImpl implements ArticleService {
     public WebResult update(Article article) {
         WebResult webResult = new WebResult();
         try {
-            articleRepository.update(article.getId(), article.getMdContent(), article.getTitle(), article.getSession());
+            articleRepository.update(article.getId(), article.getMdContent(), article.getTitle(), article.getSection());
             webResult.setStatus(1);
             webResult.setMsg("文章修改成功");
         } catch (Exception e) {

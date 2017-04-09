@@ -29,7 +29,7 @@ public class Course extends BaseEntity {
 
 
     @OneToMany
-    private List<Session> sessions = new ArrayList();
+    private List<Section> sections = new ArrayList();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "course_courseTag", joinColumns = {
@@ -70,12 +70,12 @@ public class Course extends BaseEntity {
         this.prompt = prompt;
     }
 
-    public List<Session> getSessions() {
-        return sessions;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setSessions(List<Session> sessions) {
-        this.sessions = sessions;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
     public void setName(String name) {
