@@ -1,9 +1,14 @@
 package com.gcc.course.domain;
 
+import org.springframework.context.annotation.Lazy;
+
 import javax.persistence.*;
+import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by WangZK on 2017/4/8.
@@ -16,11 +21,12 @@ public class Tag {
     private String id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "tag_article", joinColumns = {
-            @JoinColumn(name = "tagId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "articleId", referencedColumnName = "id")})
+    @ManyToMany(mappedBy = "tags",fetch = FetchType.EAGER)
     private Set<Article> articles = new HashSet<>();
+
+    public Tag() {
+
+    }
 
     public Tag(String name) {
         this.name = name;
@@ -49,4 +55,5 @@ public class Tag {
     public void setArticles(Set<Article> articles) {
         this.articles = articles;
     }
+
 }

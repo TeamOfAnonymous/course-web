@@ -1,8 +1,10 @@
 package com.gcc.course.service.impl;
 
 import com.gcc.course.domain.Section;
+import com.gcc.course.domain.Tag;
 import com.gcc.course.repository.ArticleRepository;
 import com.gcc.course.domain.Article;
+import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.WebResult;
@@ -12,7 +14,10 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by WangZK on 2017/3/12.
@@ -23,6 +28,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @Autowired
+    private TagRepository tagRepository;
+
     /**
      * 保存文章，如果文章已经存在，对文章进行更新
      *
@@ -32,17 +40,20 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public WebResult save(Article article) {
         WebResult webResult = new WebResult();
-        if (article.getId() != null || article.getId().equals("")) {
-            articleRepository.save(article);
-            webResult.setStatus(1);
-            webResult.setMsg("更新文章成功");
-            webResult.setData(article);
-        } else {
-            articleRepository.save(article);
-            webResult.setStatus(1);
-            webResult.setMsg("保存文章成功");
-            webResult.setData(article);
+
+        Set<Tag> tags = article.getTags();
+        Set<Tag> newTags = new HashSet<>();
+
+        for (Tag tag : tags) {
+            String name = tag.getName();
+            if (tagRepository.findByName(name) == null) {
+                newTags.add(tagRepository.save(tag));
+            } else {
+                newTags.add(tagRepository.findByName(name));
+            }
         }
+        article.setTags(newTags);
+        articleRepository.save(article);
         return webResult;
     }
 
