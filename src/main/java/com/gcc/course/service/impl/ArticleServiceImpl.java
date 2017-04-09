@@ -8,6 +8,8 @@ import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.SessionService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,11 +23,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private SessionService sessionServiceImpl;
 
     /**
-     * 创建文章
+     * 保存文章，如果文章已经存在，对文章进行更新
      *
      * @param article
      * @return
@@ -33,55 +33,76 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public WebResult save(Article article) {
         WebResult webResult = new WebResult();
-        if (article.getId() == null || "".equals(article.getId())){
-            article = articleRepository.save(article);
+        if (article.getId() != null || article.getId().equals("")) {
+            articleRepository.save(article);
             webResult.setStatus(1);
-            webResult.setMsg("文章保存成功");
+            webResult.setMsg("更新文章成功");
             webResult.setData(article);
         } else {
-            webResult.setStatus(0);
-            webResult.setMsg("文章保存失败，该文章已存在");
+            articleRepository.save(article);
+            webResult.setStatus(1);
+            webResult.setMsg("保存文章成功");
+            webResult.setData(article);
         }
         return webResult;
     }
 
     /**
-     * 通过文章id获取文章
+     * 发布文章
+     *
+     * @param article
+     * @return
+     */
+    @Override
+    public WebResult release(Article article) {
+        WebResult webResult = new WebResult();
+        //将文章状态设置为发布
+        article.setState(1);
+        articleRepository.save(article);
+        webResult.setStatus(1);
+        webResult.setMsg("文章发布成功");
+        webResult.setData(article);
+        return webResult;
+    }
+
+    /**
+     * 发布文章
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public WebResult release(String id) {
+        WebResult webResult = new WebResult();
+        Article article = articleRepository.findOne(id);
+        if (article != null) {
+            //将文章状态设置为发布
+            article.setState(1);
+            articleRepository.save(article);
+            webResult.setStatus(1);
+            webResult.setMsg("文章发布成功");
+            webResult.setData(article);
+        }
+        return webResult;
+    }
+
+    /**
+     * 根据id查找文章
      *
      * @param id
      * @return
      */
     @Override
     public Article get(String id) {
-        Article article = null;
         try {
-            article = articleRepository.findOne(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return article;
+            return articleRepository.findOne(id);
+        } catch (IllegalArgumentException e) {
+            return null;
+        } catch (InvalidDataAccessApiUsageException e) {
+            return null;
         }
     }
 
-    /**
-     * 通过父节点id查找文章
-     *
-     * @return
-     */
-    @Override
-    public List<Article> getArticleList(String id) {
-        List<Article> articles = null;
-        try {
-            Session session = sessionServiceImpl.get(id);
-            if (session != null) {
-                articles = articleRepository.findBySession(session);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return articles;
-        }
-    }
 
     /**
      * 修改文章
@@ -91,20 +112,8 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult update(Article article) {
-        WebResult webResult = new WebResult();
-        try {
-            articleRepository.update(article.getId(), article.getMdContent(), article.getTitle(), article.getSession());
-            webResult.setStatus(1);
-            webResult.setMsg("文章修改成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            webResult.setStatus(0);
-            webResult.setMsg("文章修改失败");
-        } finally {
-            return webResult;
-        }
+        return null;
     }
-
 
     /**
      * 删除文章
@@ -115,16 +124,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean remove(String id) {
         try {
-            Article article = articleRepository.findOne(id);
-            if (article != null) {
-                articleRepository.update(article.getId(), LocalDateTime.now(), 1);
+            Integer result = articleRepository.uploadStatusAndDeletedTimeById(1, LocalDateTime.now(), id);
+            if (result == 1) {
+                return true;
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return false;
-        } finally {
-            return true;
+        } catch (InvalidDataAccessApiUsageException e) {
+            return false;
         }
     }
 
@@ -137,16 +146,16 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public boolean recovery(String id) {
         try {
-            Article article = articleRepository.findOne(id);
-            if (article != null) {
-                articleRepository.update(article.getId(), null, 0);
+            Integer result = articleRepository.uploadStatusAndDeletedTimeById(0, null, id);
+            if (result == 1) {
+                return true;
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return false;
-        } finally {
-            return true;
+        } catch (InvalidDataAccessApiUsageException e) {
+            return false;
         }
     }
 }

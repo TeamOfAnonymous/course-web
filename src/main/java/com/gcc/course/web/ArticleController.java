@@ -30,7 +30,7 @@ public class ArticleController {
     @GetMapping("articleList/{id}")
     @ApiOperation(value = "获取文章列表")
     public List<Article> getArticleList(@PathVariable String id) {
-        return articleServiceImpl.getArticleList(id);
+        return null;
     }
 
 }
