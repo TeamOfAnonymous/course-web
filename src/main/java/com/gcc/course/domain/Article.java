@@ -26,7 +26,7 @@ public class Article extends BaseEntity {
     //@Column(columnDefinition = "longtext") //columnDefinition不推荐使用，因为可能导致移植性不好，各个数据库不兼容等。
     private String mdContent; //正文md格式
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "article_tag", joinColumns = {
             @JoinColumn(name = "articleId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "tagId", referencedColumnName = "id")})

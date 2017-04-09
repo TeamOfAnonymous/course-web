@@ -7,6 +7,7 @@ import com.gcc.course.domain.Article;
 import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.SectionService;
+import com.gcc.course.service.TagService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Autowired
-    private TagRepository tagRepository;
+    private TagService tagService;
 
     /**
      * 保存文章，如果文章已经存在，对文章进行更新
@@ -39,21 +40,16 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult save(Article article) {
-        WebResult webResult = new WebResult();
-
-        Set<Tag> tags = article.getTags();
-        Set<Tag> newTags = new HashSet<>();
-
-        for (Tag tag : tags) {
-            String name = tag.getName();
-            if (tagRepository.findByName(name) == null) {
-                newTags.add(tagRepository.save(tag));
-            } else {
-                newTags.add(tagRepository.findByName(name));
-            }
-        }
-        article.setTags(newTags);
+        WebResult webResult = null;
+        String id = article.getId();
+        article.setTags(tagService.saveBySet(article.getTags()));
         articleRepository.save(article);
+        if (articleRepository.findOne(id) == null) {
+            webResult = new WebResult(1,"文章保存成功",article);
+        } else {
+            webResult = new WebResult(1,"文章更新成功",article);
+        }
+
         return webResult;
     }
 
@@ -65,15 +61,17 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult release(Article article) {
-        WebResult webResult = new WebResult();
+        WebResult webResult = null;
+
         //将文章状态设置为发布
         article.setState(1);
+        article.setTags(tagService.saveBySet(article.getTags()));
         articleRepository.save(article);
-        webResult.setStatus(1);
-        webResult.setMsg("文章发布成功");
-        webResult.setData(article);
+        webResult = new WebResult(1,"文章发布成功",article);
+
         return webResult;
     }
+
 
     /**
      * 发布文章
@@ -123,7 +121,6 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult update(Article article) {
-
         return null;
     }
 

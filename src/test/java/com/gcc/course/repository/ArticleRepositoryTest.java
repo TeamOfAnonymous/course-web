@@ -21,13 +21,10 @@ public class ArticleRepositoryTest {
     @Autowired
     private ArticleRepository articleRepository;
 
-    /**
-     * 添加文章
-     */
     @Test
-    public void testSave() {
-        Article article = new Article();
-
-        articleRepository.save(article);
+    public void testFindOne() {
+        String id = "0eedd17a-907a-497a-82cb-40e0a363bdc6";
+        Article article = articleRepository.findOne(id);
+        System.out.println(article);
     }
 }

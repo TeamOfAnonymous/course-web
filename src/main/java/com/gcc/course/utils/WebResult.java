@@ -20,6 +20,14 @@ public class WebResult {
     //响应中的数据
     private Object data;
 
+    public WebResult() {}
+
+    public WebResult(Integer status, String msg, Object data) {
+        this.status = status;
+        this.msg = msg;
+        this.data = data;
+    }
+
     public Integer getStatus() {
         return status;
     }
