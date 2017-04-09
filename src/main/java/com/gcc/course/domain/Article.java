@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -24,11 +25,14 @@ public class Article extends BaseEntity {
     //@Column(columnDefinition = "longtext") //columnDefinition不推荐使用，因为可能导致移植性不好，各个数据库不兼容等。
     private String mdContent; //正文md格式
 
-    @ManyToOne
-    private Session session; //所属章节
+    @ManyToMany(mappedBy = "articles")
+    private Set<Tag> tags;
+
+    private Integer state; //文章状态，1为发布，0为未发布
 
     public Article() {
         this.publishedTime = LocalDateTime.now();
+        this.state = 0;
     }
 
     public String getTitle() {
@@ -55,12 +59,19 @@ public class Article extends BaseEntity {
         this.mdContent = mdContent;
     }
 
-    public Session getSession() {
-        return session;
+    public Set<Tag> getTags() {
+        return tags;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
 }
