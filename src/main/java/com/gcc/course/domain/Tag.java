@@ -21,6 +21,10 @@ public class Tag {
             inverseJoinColumns = {@JoinColumn(name = "articleId", referencedColumnName = "id")})
     private Set<Article> articles;
 
+    public Tag(String name) {
+        this.name = name;
+    }
+
     public String getId() {
         return id;
     }
