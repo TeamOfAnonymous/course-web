@@ -2,6 +2,7 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Tag;
+import com.gcc.course.utils.WebResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
+import static org.apache.coyote.http11.Constants.a;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -28,13 +30,16 @@ public class ArticleServiceTest {
     @Test
     public void testSave() {
         Article article = new Article();
-        article.setTitle("【第一天】01-HTML基础+02-HTML的标签（上）");
-        article.setMdContent("测试");
+        //article.setId("9b7f11ba-ccd8-43bb-b84a-58f0d7d06b2");
+        article.setTitle("测试3");
+        article.setMdContent("测试3");
 
-        article.getTags().add(new Tag("HTML基础"));
-        article.getTags().add(new Tag("HTML标签"));
+        article.getTags().add(new Tag("测试1"));
+        article.getTags().add(new Tag("测试2"));
 
-
+        WebResult webResult = articleService.save(article);
+        assertThat(webResult).isNotNull();
+        assertThat(webResult.getMsg()).isEqualTo("文章保存成功");
     }
 
     /**
@@ -42,7 +47,28 @@ public class ArticleServiceTest {
      */
     @Test
     public void testRelease() {
+        Article article = new Article();
+        //article.setId("f2939c49-8a87-43dc-9e54-01e7d19cf567");
+        article.setTitle("测试5");
+        article.setMdContent("测试5");
 
+        article.getTags().add(new Tag("测试1"));
+        article.getTags().add(new Tag("测试2"));
+
+        WebResult webResult = articleService.release(article);
+        assertThat(webResult).isNotNull();
+        assertThat(webResult.getMsg()).isEqualTo("文章发布成功");
+    }
+
+    /**
+     * 根据id发布文章
+     */
+    @Test
+    public void testReleaseById() {
+        String id = "0eedd17a-907a-497a-82cb-40e0a363bdc6";
+        WebResult webResult = articleService.release(id);
+        Article article = (Article) webResult.getData();
+        assertThat(article.getState()).isEqualTo(1);
     }
 
     /**

@@ -21,7 +21,7 @@ public class Tag {
     private String id;
     private String name;
 
-    @ManyToMany(mappedBy = "tags",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tags")
     private Set<Article> articles = new HashSet<>();
 
     public Tag() {
