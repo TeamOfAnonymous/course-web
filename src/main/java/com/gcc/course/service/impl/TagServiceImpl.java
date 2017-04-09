@@ -4,6 +4,7 @@ import com.gcc.course.domain.Tag;
 import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
  * Description：enter your comment
  * Created by Peivxuan on 2017/4/9.
  */
+@Service
 public class TagServiceImpl implements TagService {
 
 	@Autowired
