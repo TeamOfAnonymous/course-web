@@ -130,7 +130,14 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult update(Article article) {
-        return null;
+        WebResult webResult = null;
+        if (articleRepository.findOne(article.getId()) != null) {
+            articleRepository.save(article);
+            webResult = new WebResult(1,"文章修改成功",article);
+        } else {
+            webResult = new WebResult(0,"文章修改失败",null);
+        }
+        return webResult;
     }
 
     /**
