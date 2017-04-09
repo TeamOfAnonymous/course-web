@@ -95,6 +95,16 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     /**
+     * 获取文章列表
+     *
+     * @return
+     */
+    @Override
+    public List<Article> get() {
+        return articleRepository.findAll();
+    }
+
+    /**
      * 根据id查找文章
      *
      * @param id
@@ -108,7 +118,6 @@ public class ArticleServiceImpl implements ArticleService {
             return null;
         } catch (InvalidDataAccessApiUsageException e) {
             return null;
-
         }
     }
 

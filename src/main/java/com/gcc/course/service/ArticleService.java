@@ -19,6 +19,9 @@ public interface ArticleService {
     //发布文章
     WebResult release(String id);
 
+    //获取文章列表
+    List<Article> get();
+
     //根据id获取文章
     Article get(String id);
 

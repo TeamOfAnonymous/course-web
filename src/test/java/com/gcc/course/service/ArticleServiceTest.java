@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 
+import java.util.List;
+
 import static org.apache.coyote.http11.Constants.a;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -69,6 +71,15 @@ public class ArticleServiceTest {
         WebResult webResult = articleService.release(id);
         Article article = (Article) webResult.getData();
         assertThat(article.getState()).isEqualTo(1);
+    }
+
+    /**
+     * 获取文章列表
+     */
+    @Test
+    public void testGetAll() {
+        List<Article> articles = articleService.get();
+        assertThat(articles.size()).isGreaterThan(0);
     }
 
     /**
