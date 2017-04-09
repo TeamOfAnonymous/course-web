@@ -1,11 +1,10 @@
 package com.gcc.course.service.impl;
 
-import com.gcc.course.domain.Session;
+import com.gcc.course.domain.Section;
 import com.gcc.course.repository.ArticleRepository;
 import com.gcc.course.domain.Article;
-import com.gcc.course.repository.SessionRepository;
 import com.gcc.course.service.ArticleService;
-import com.gcc.course.service.SessionService;
+import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -100,6 +99,7 @@ public class ArticleServiceImpl implements ArticleService {
             return null;
         } catch (InvalidDataAccessApiUsageException e) {
             return null;
+
         }
     }
 
@@ -112,6 +112,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public WebResult update(Article article) {
+
         return null;
     }
 

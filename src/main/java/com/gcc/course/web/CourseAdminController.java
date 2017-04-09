@@ -1,9 +1,7 @@
 package com.gcc.course.web;
 
 import com.gcc.course.domain.Course;
-import com.gcc.course.service.ArticleService;
 import com.gcc.course.service.CourseService;
-import com.gcc.course.service.SessionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

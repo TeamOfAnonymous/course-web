@@ -1,7 +1,6 @@
 package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
-import com.gcc.course.domain.Session;
 import com.gcc.course.utils.WebResult;
 
 import java.util.List;
