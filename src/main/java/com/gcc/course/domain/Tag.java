@@ -1,6 +1,7 @@
 package com.gcc.course.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Tag {
     @JoinTable(name = "tag_article", joinColumns = {
             @JoinColumn(name = "tagId", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "articleId", referencedColumnName = "id")})
-    private Set<Article> articles;
+    private Set<Article> articles = new HashSet<>();
 
     public Tag(String name) {
         this.name = name;

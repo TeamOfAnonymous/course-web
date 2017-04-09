@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,8 +27,9 @@ public class Article extends BaseEntity {
     private String mdContent; //正文md格式
 
     @ManyToMany(mappedBy = "articles")
-    private Set<Tag> tags;
+    private Set<Tag> tags = new HashSet<>();
 
+    @Column(columnDefinition = "INT default 0")
     private Integer state; //文章状态，1为发布，0为未发布
 
     public Article() {
