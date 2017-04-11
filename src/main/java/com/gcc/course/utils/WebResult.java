@@ -28,6 +28,14 @@ public class WebResult {
         this.data = data;
     }
 
+    public static WebResult ok(){
+        return new WebResult( 200, "OK", null);
+    }
+
+    public static WebResult ok(Object data){
+        return new WebResult( 200, "OK", data);
+    }
+
     public Integer getStatus() {
         return status;
     }
