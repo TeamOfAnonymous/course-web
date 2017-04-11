@@ -1,7 +1,6 @@
 package com.gcc.course.repository;
 
 import com.gcc.course.domain.Course;
-import com.gcc.course.domain.CourseTag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

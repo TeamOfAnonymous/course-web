@@ -1,9 +1,7 @@
 package com.gcc.course.service;
 
 import com.gcc.course.domain.Course;
-import com.gcc.course.domain.CourseTag;
-
-import java.util.List;
+import com.gcc.course.utils.WebResult;
 
 /**
  * Created by huangMP on 2017/3/30.
@@ -11,15 +9,15 @@ import java.util.List;
  */
 public interface CourseService {
 
-    Course save(Course course);
+    WebResult save(Course course);
 
-    Course get(String id);
+    WebResult get(String id);
 
-    Course update(Course course);
+    WebResult update(Course course);
 
-    boolean remove(String id);
+    WebResult remove(String id);
 
-    List<Course> findAll();
+    WebResult findAll();
 
-    List<Course> getPageList(int page, int rows);
+    WebResult getPageList(int page, int rows);
 }
