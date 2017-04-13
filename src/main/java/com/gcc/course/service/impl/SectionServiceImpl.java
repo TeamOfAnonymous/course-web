@@ -1,5 +1,6 @@
 package com.gcc.course.service.impl;
 
+import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
 import com.gcc.course.domain.Tag;
 import com.gcc.course.repository.SectionRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Peivxuan on 2017/3/20.
@@ -56,5 +58,10 @@ public class SectionServiceImpl implements SectionService {
     @Override
     public Section update(Section section) {
         return sectionRepository.save(section);
+    }
+
+    @Override
+    public Set<Section> findByCourse(Course course){
+        return sectionRepository.findByCourse(course);
     }
 }

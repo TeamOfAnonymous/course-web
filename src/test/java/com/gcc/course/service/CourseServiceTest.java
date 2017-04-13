@@ -2,15 +2,19 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Course;
+import com.gcc.course.domain.Section;
 import com.gcc.course.domain.Tag;
 import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.CourseAdminController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,6 +27,10 @@ public class CourseServiceTest {
 
     @Autowired
     private CourseService courseService;
+    @Autowired
+    private SectionService sectionService;
+    @Autowired
+    private CourseAdminController courseAdminController;
 
     /**
      * 测试添加课程
@@ -61,8 +69,9 @@ public class CourseServiceTest {
      */
     @Test
     public void testGetOne() {
-        String id = "bb316f3c-d042-40d2-8121-08f44ca33d78";
+        String id = "66ada6e0-9c29-47b0-acc3-b96b1f35bc36";
         Course course = (Course) courseService.get(id).getData();
+        System.out.println(course.getSections().iterator().next().getName());
         assertThat(course).isNotNull();
     }
 
@@ -74,5 +83,41 @@ public class CourseServiceTest {
         String id = "ac7add1c-842f-4dcb-ac9e-db20baadc0fe";
         boolean result = (boolean) courseService.remove(id).getData();
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void testSaveSection(){
+        Course course = (Course) courseService.get("4b831565-1829-4547-a452-5bc35789eeea").getData();
+        course.setDescription("已修改");
+        Section section = new Section();
+        section.setName("测试章节2");
+        section.setCourse(course);
+        sectionService.save(section);
+    }
+
+    @Test
+    public void testSave_Update(){
+
+
+        Course course = new Course();
+        course.setName("商业软件工程架构3");
+
+        Section section = new Section();
+        section.setName("测试章节3");
+        section.setCourse(course);
+        courseService.save(course);
+        sectionService.save(section);
+    }
+
+    @Test
+    public void testCourseController(){
+        courseAdminController.get("4b831565-1829-4547-a452-5bc35789eeea");
+    }
+
+    @Test
+    public void testSection(){
+        Course course = (Course) courseService.get("4b831565-1829-4547-a452-5bc35789eeea").getData();
+        Set<Section> list = sectionService.findByCourse(course);
+        System.out.println(list.size());
     }
 }

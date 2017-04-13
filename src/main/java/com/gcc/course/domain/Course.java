@@ -1,11 +1,21 @@
 package com.gcc.course.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.annotations.Where;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by huangMP on 2017/3/30.
@@ -15,17 +25,32 @@ import java.util.List;
 @Where(clause = "status != 1")
 public class Course extends BaseEntity {
 
-    private String name; // 名称
-    private String description; //简介
-    private String imgUrl; //图片路径
-    private String prompt ; // 提示
-    private int sortOrder ; //排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
+    /**
+     * 名称
+     */
+    private String name;
+    /**
+     * 简介
+     */
+    private String description;
+    /**
+     * 图片路径
+     */
+    private String imgUrl;
+    /**
+     * 提示
+     */
+    private String prompt ;
+    /**
+     * 排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
+     */
+    private int sortOrder ;
 
     @JsonFormat(pattern = "yyyy/MM/dd")
     private LocalDateTime addTime; //添加时间
 
-    @OneToMany
-    private List<Section> sections = new ArrayList();
+    @OneToMany(mappedBy = "course")
+    private Set<Section> sections = new HashSet<>();
 
     public Course() {
         this.addTime = LocalDateTime.now();
@@ -51,11 +76,11 @@ public class Course extends BaseEntity {
         this.prompt = prompt;
     }
 
-    public List<Section> getSections() {
+    public Set<Section> getSections() {
         return sections;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(Set<Section> sections) {
         this.sections = sections;
     }
 

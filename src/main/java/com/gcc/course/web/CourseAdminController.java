@@ -8,8 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * Created by WangZK on 2017/3/20.
  */
@@ -42,7 +40,7 @@ public class CourseAdminController {
     @GetMapping("{id}")
     @ApiOperation(value = "获取课程")
     public WebResult get(@PathVariable String id) {
-        return courseServiceImpl.get(id);
+        return courseServiceImpl.get(id) ;
     }
 
     @GetMapping("getAll")
@@ -52,7 +50,7 @@ public class CourseAdminController {
     }
 
     @GetMapping("list")
-    @ApiOperation(value = "分页查找课程")
+    @ApiOperation(value = "分页查找课程  currentNum=当前数据条数  rows=获取的条数" )
     public WebResult getAll(@RequestParam int currentNum , @RequestParam int rows) {
         // 算出下一页的页码 （第一页页码为0）
         int page = currentNum / rows ;
