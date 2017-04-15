@@ -37,45 +37,10 @@ public class LinkController {
         return "writer";
     }
 
-
-    @ApiOperation(value = "跳转到后台内容页面")
-    @GetMapping(value = "goAdminContent")
-    public String goAdminContent() {
-        return "content_admin";
-    }
-
     @ApiOperation(value = "跳转到后台登陆页面")
     @GetMapping(value = "goAdminLogin")
     public String goAdminLogin() {
         return "login_admin";
     }
-
-    @ApiOperation(value = "跳转到后台用户页面")
-    @GetMapping(value = "goAdminUser")
-    public String goAdminUser() {
-        return "user_admin";
-    }
-
-
-    @ApiOperation(value = "跳转到后台课程页面")
-    @GetMapping(value = "goAdminCourse")
-    public String goAdminCourse() {
-        return "course_admin";
-    }
-
-    @ApiOperation(value = "跳转到后台课时页面")
-    @GetMapping(value = "goAdminSection")
-    public String goAdminSection() {
-        return "section_admin";
-    }
-
-    @ApiOperation(value = "跳转到后台首页")
-    @GetMapping(value = "goAdminIndex")
-    public String goAdminIndex() {
-        return "index_admin";
-    }
-
-
-
 
 }

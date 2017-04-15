@@ -1,6 +1,7 @@
 package com.gcc.course.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -26,10 +27,11 @@ public class Article extends BaseEntity {
     //@Column(columnDefinition = "longtext") //columnDefinition不推荐使用，因为可能导致移植性不好，各个数据库不兼容等。
     private String mdContent; //正文md格式
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "article_tag", joinColumns = {
-            @JoinColumn(name = "articleId", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "tagId", referencedColumnName = "id")})
+    @ManyToMany
+    @JoinTable(name = "article_tags", joinColumns = {
+            @JoinColumn(name = "articles_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "tags_id", referencedColumnName = "id")})
+    @JsonIgnore
     private Set<Tag> tags = new HashSet<>();
 
     @Column(columnDefinition = "INT default 0")

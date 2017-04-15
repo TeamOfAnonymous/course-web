@@ -1,9 +1,11 @@
 package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
+import com.gcc.course.domain.Tag;
 import com.gcc.course.utils.WebResult;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by WangZK on 2017/3/12.
@@ -33,4 +35,7 @@ public interface ArticleService {
 
     //恢复文章
     boolean recovery(String id);
+
+    //通过文章id获取标签
+    Set<Tag> getTags(String id);
 }

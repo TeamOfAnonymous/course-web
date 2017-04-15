@@ -1,22 +1,16 @@
 package com.gcc.course.service.impl;
 
-import com.gcc.course.domain.Section;
 import com.gcc.course.domain.Tag;
 import com.gcc.course.repository.ArticleRepository;
 import com.gcc.course.domain.Article;
-import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.ArticleService;
-import com.gcc.course.service.SectionService;
 import com.gcc.course.service.TagService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +24,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleRepository articleRepository;
 
     @Autowired
-    private TagService tagService;
+    private TagService tagServiceImpl;
 
     /**
      * 保存文章，如果文章已经存在，对文章进行更新
@@ -42,12 +36,16 @@ public class ArticleServiceImpl implements ArticleService {
     public WebResult save(Article article) {
         WebResult webResult = null;
         String id = article.getId();
-        article.setTags(tagService.saveBySet(article.getTags()));
+        article.setTags(tagServiceImpl.saveBySet(article.getTags()));
         articleRepository.save(article);
-        if (articleRepository.findOne(id) == null) {
-            webResult = new WebResult(1,"文章保存成功",article);
+        if (null == id || "".equals(id)) {
+            webResult = new WebResult(1, "文章保存成功", article);
         } else {
-            webResult = new WebResult(1,"文章更新成功",article);
+            if (articleRepository.findOne(id) == null) {
+                webResult = new WebResult(1, "文章保存成功", article);
+            } else {
+                webResult = new WebResult(1, "文章更新成功", article);
+            }
         }
 
         return webResult;
@@ -65,9 +63,9 @@ public class ArticleServiceImpl implements ArticleService {
 
         //将文章状态设置为发布
         article.setState(1);
-        article.setTags(tagService.saveBySet(article.getTags()));
+        article.setTags(tagServiceImpl.saveBySet(article.getTags()));
         articleRepository.save(article);
-        webResult = new WebResult(1,"文章发布成功",article);
+        webResult = new WebResult(1, "文章发布成功", article);
 
         return webResult;
     }
@@ -113,7 +111,26 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Article get(String id) {
         try {
-            return articleRepository.findOne(id);
+            Article article = articleRepository.findOne(id);
+            return article;
+        } catch (IllegalArgumentException e) {
+            return null;
+        } catch (InvalidDataAccessApiUsageException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 根据id获取标签
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Set<Tag> getTags(String id) {
+        try {
+            Article article = articleRepository.findOne(id);
+            return article.getTags();
         } catch (IllegalArgumentException e) {
             return null;
         } catch (InvalidDataAccessApiUsageException e) {
@@ -133,9 +150,9 @@ public class ArticleServiceImpl implements ArticleService {
         WebResult webResult = null;
         if (articleRepository.findOne(article.getId()) != null) {
             articleRepository.save(article);
-            webResult = new WebResult(1,"文章修改成功",article);
+            webResult = new WebResult(1, "文章修改成功", article);
         } else {
-            webResult = new WebResult(0,"文章修改失败",null);
+            webResult = new WebResult(0, "文章修改失败", null);
         }
         return webResult;
     }
