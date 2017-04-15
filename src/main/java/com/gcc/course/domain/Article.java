@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,7 +21,8 @@ import java.util.UUID;
 public class Article extends BaseEntity {
 
     private String title;//标题
-    @JsonFormat(pattern = "yyyy/MM/dd")
+
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime publishedTime; //发表时间
 
     @Column(length = 16777216)
@@ -36,6 +38,9 @@ public class Article extends BaseEntity {
 
     @Column(columnDefinition = "INT default 0")
     private Integer state; //文章状态，1为发布，0为未发布
+
+    @Transient
+    private String tagStr;
 
     public Article() {
         this.publishedTime = LocalDateTime.now();
@@ -80,5 +85,13 @@ public class Article extends BaseEntity {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public String getTagStr() {
+        return tagStr;
+    }
+
+    public void setTagStr(String tagStr) {
+        this.tagStr = tagStr;
     }
 }

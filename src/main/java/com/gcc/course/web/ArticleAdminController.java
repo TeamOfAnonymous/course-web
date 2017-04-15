@@ -61,7 +61,7 @@ public class ArticleAdminController {
     }
 
     @GetMapping("getTags/{id}")
-    @ApiOperation(value = "获取文章")
+    @ApiOperation(value = "获取文章的所有标签")
     public Set<Tag> getTags(@PathVariable String id) {
         return articleServiceImpl.getTags(id);
     }
