@@ -25,6 +25,9 @@ public class Section extends BaseEntity {
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime addTime; // 添加时间
 
+    @Transient
+    private String courseId;
+
     @ManyToOne
     @Cascade(CascadeType.SAVE_UPDATE)
     @JsonIgnore
@@ -82,5 +85,13 @@ public class Section extends BaseEntity {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 }
