@@ -26,12 +26,12 @@ webpackJsonp([0], {
                     console.log("保存文章iiii"), console.log({
                         title: this.article.title,
                         state: 0,
-                        tags: this.article.tags,
+                        tagSet: this.article.tagSet,
                         mdContent: testEditor.getMarkdown()
                     }), this.$http.post("/admin/article", {
                         title: this.article.title,
                         state: 1,
-                        tags: this.article.tags,
+                        tagSet: this.article.tagSet,
                         mdContent: testEditor.getMarkdown()
                     }).then(function (n) {
                         t.cancel(), t.$message.success("提交成功")
@@ -44,38 +44,39 @@ webpackJsonp([0], {
                             id: this.article.id,
                             title: this.article.title,
                             state: 1,
-                            tags: this.article.tags,
+                            tagSet: this.article.tagSet,
                             mdContent: testEditor.getMarkdown()
                         }), this.$http.post("/admin/article", {
                             id: this.article.id,
                             title: this.article.title,
                             state: 1,
-                            tags: this.article.tags,
+                            tagSet: this.article.tagSet,
                             mdContent: testEditor.getMarkdown()
                         }).then(function (n) {
-                            t.cancel(), t.$message.success("提交成功")
+                            t.cancel(), t.$emit("getArticles"), t.$message.success("提交成功")
                         }, function (n) {
                             t.$message.error("提交失败")
                         })) : (console.log("新增文章ggg"), console.log({
                             title: this.article.title,
                             state: 0,
-                            tags: this.article.tags,
+                            tagSet: this.article.tagSet,
                             mdContent: testEditor.getMarkdown()
                         }), this.$http.post("/admin/article", {
                             title: this.article.title,
                             state: 0,
-                            tags: this.article.tags,
+                            tagSet: this.article.tagSet,
                             mdContent: testEditor.getMarkdown()
                         }).then(function (n) {
-                            t.cancel(), t.$message.success("提交成功")
+                            t.cancel(), t.$emit("getArticles"), t.$message.success("提交成功")
                         }, function (n) {
                             t.$message.error("提交失败")
                         }))
                 }, handleClose: function (t) {
-                    this.article.tags.splice(this.article.tags.indexOf(t), 1)
+                    for (var n = 0, e = 0; e < this.article.tagSet.length; e++)this.article.tagSet[e].name == t.name && (n = e);
+                    this.article.tagSet.splice(n, 1)
                 }, handleInputConfirm: function () {
                     var t = this.dialog.form.inputTag;
-                    t && this.article.tags.push(t), this.dialog.form.inputTag = ""
+                    t && this.article.tagSet.push({name: t}), this.dialog.form.inputTag = ""
                 }, querySearchTag: function (t, n) {
                     var e = this.dialog.restaurants;
                     n(t ? e.filter(this.createFilterTag(t)) : e)
@@ -97,19 +98,28 @@ webpackJsonp([0], {
         var i = e(14);
         e.n(i);
         n.default = {
-            name: "articlesList", props: ["articles"], components: {"el-badge": i.Badge}, data: function () {
+            name: "articlesList",
+            props: ["articles", "currentPage", "totalArticles"],
+            components: {"el-badge": i.Badge},
+            data: function () {
                 return {}
-            }, created: function () {
-            }, methods: {
-                delArticle: function (t) {
+            },
+            created: function () {
+            },
+            methods: {
+                handleSizeChange: function (t) {
+                    console.log("每页 " + t + " 条")
+                }, handleCurrentChange: function (t) {
+                    this.currentPage = t, console.log("当前页: " + t)
+                }, delArticle: function (t) {
                     var n = this;
                     this.$confirm("此操作将永久删除" + t.title + ", 是否继续?", "提示", {
                         confirmButtonText: "确定",
                         cancelButtonText: "取消",
                         type: "warning"
                     }).then(function () {
-                        console.log("删除文章jjjjj"), console.log(t.id), n.$http.get("url" + t.id).then(function (e) {
-                            if (e.data.data)for (var i = 0; i < n.articlesList.length; i++)n.articlesList[i].id == t.id && (n.articlesList.splice(i, 1), n.$message.success("删除成功")); else n.$message.error("删除失败")
+                        console.log("删除文章jjjjj"), console.log(t.id), n.$http.get("url" + t.id).then(function (t) {
+                            t.data.data ? n.$emit("getArticles") : n.$message.error("删除失败")
                         }, function (t) {
                             n.$message.error("链接失败")
                         })
@@ -128,9 +138,9 @@ webpackJsonp([0], {
             version: 3,
             sources: ["D:/code/Hubilder/gcweb/src/components/page/article/ArticleWrite.vue"],
             names: [],
-            mappings: "AA6LA,sBACC,SAAU,AACV,cAAe,AACf,yBAA0B,AAC1B,UAAY,CACZ,AACD,WACC,gBAAkB,CAClB,AACD,yBACC,eAAiB,CACjB",
+            mappings: "AAqMA,sBACC,SAAU,AACV,cAAe,AACf,yBAA0B,AAC1B,UAAY,CACZ,AACD,WACC,gBAAkB,CAClB,AACD,yBACC,eAAiB,CACjB",
             file: "ArticleWrite.vue",
-            sourcesContent: ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.input-new-tag {\n\twidth: 100px;\n}\n\n.el-dialog .el-tag {\n\tdisplay: inline-block;\n\tfont-size: 14px;\n\theight: 36px;\n\tline-height: 34px;\n\tpadding: 0 7px;\n\tmargin-right: 10px;\n}*/\n.labels .el-form-item {\n\tmargin: 0;\n\tpadding: 5px 0;\n\tbackground-color: #f7f7f7;\n\twidth: 100%;\n}\n.ql-editor {\n\tmin-height: 500px;\n}\n.editMd .el-input__inner {\n\tborder-radius: 0;\n}\n.editormd {\n\t/*border-top: none;*/\n}\n.submit {\n\t/*text-align: center;*/\n}\n"],
+            sourcesContent: ["\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*.input-new-tag {\n\twidth: 100px;\n}\n\n.el-dialog .el-tag {\n\tdisplay: inline-block;\n\tfont-size: 14px;\n\theight: 36px;\n\tline-height: 34px;\n\tpadding: 0 7px;\n\tmargin-right: 10px;\n}*/\n.labels .el-form-item {\n\tmargin: 0;\n\tpadding: 5px 0;\n\tbackground-color: #f7f7f7;\n\twidth: 100%;\n}\n.ql-editor {\n\tmin-height: 500px;\n}\n.editMd .el-input__inner {\n\tborder-radius: 0;\n}\n.editormd {\n\t/*border-top: none;*/\n}\n.submit {\n\t/*text-align: center;*/\n}\n"],
             sourceRoot: ""
         }])
     }, 111: function (t, n, e) {
@@ -140,7 +150,7 @@ webpackJsonp([0], {
             names: [],
             mappings: "AACA,cACC,kBAAmB,AACnB,iBAAkB,AAClB,cAAe,AACf,wBAA0B,CAC1B,AACD,SACC,WAAY,AACZ,kBAAmB,AACnB,YAAa,AACb,WAAY,AACZ,qBAAuB,CACvB,AACD,SACC,eAAgB,AAChB,YAAa,AACb,YAAa,AACb,gBAAiB,AACjB,mBAAoB,AACpB,uBAAwB,AACxB,4BAA8B,CAC9B,AACD,8CAKC,eAAgB,AAChB,iBAAkB,AAClB,eAAiB,CACjB,AACD,qCACC,UAAW,AACX,UAAY,CACZ,AACD,WACC,8BAAgC,AAChC,gBAAiB,AACjB,uBAAwB,AACxB,qBAAsB,AACtB,4BAA6B,AAC7B,oBAAsB,CACtB,AACD,QACC,qBAAuB,CACvB,AACD,aACC,qBAAsB,AACtB,eAAgB,AAChB,yBAA0B,AAC1B,iBAAkB,AAClB,aAAc,AACd,mBAAoB,AACpB,eAAgB,AAChB,cAAe,AACf,gBAAiB,AACjB,gBAAiB,AACjB,mBAAoB,AACpB,sBAAwB,CACxB,AACD,aACC,WAAa,CACb,AACD,wBACC,gBAAiB,AACjB,WAAa,CACb",
             file: "ArticlesList.vue",
-            sourcesContent: ["\n.articlesList {\n\tposition: relative;\n\tpadding: 5px 10px;\n\toverflow: auto;\n\theight: calc(100% - 66px);\n}\n.article {\n\tfloat: left;\n\tposition: relative;\n\twidth: 250px;\n\tmargin: 7px;\n\tborder: 1px solid #ccc;\n}\n.a-title {\n\tfont-size: 20px;\n\tpadding: 7px;\n\twidth: 236px;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\tborder-bottom: 1px solid #ccc;\n}\n.a-author,\n.a-time,\n.a-views,\n.a-content,\n.a-tags {\n\tfont-size: 13px;\n\tline-height: 20px;\n\tpadding: 1px 5px;\n}\n.article .el-badge__content.is-fixed {\n\tz-index: 3;\n\tright: 30px;\n}\n.a-content{\n\tdisplay: -webkit-box !important;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tword-break: break-all;\n\t-webkit-box-orient: vertical;\n\t-webkit-line-clamp: 3;\n}\n.a-tags {\n\tbackground-color: #fff;\n}\n.a-tags span {\n\tdisplay: inline-block;\n\tfont-size: 13px;\n\tborder: 1px solid #20A0FF;\n\tpadding: 2px 10px;\n\tmargin: 1px 0;\n\tborder-radius: 40px;\n\tcursor: pointer;\n\tcolor: #1D8CE0;\n\tmax-width: 218px;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n}\n.a-operation{\n\tpadding: 5px;\n}\n.a-operation .el-button {\n\tmargin-left: 5px;\n\tpadding: 7px;\n}\n"],
+            sourcesContent: ["\n.articlesList {\n\tposition: relative;\n\tpadding: 5px 10px;\n\toverflow: auto;\n\theight: calc(100% - 66px);\n}\n.article {\n\tfloat: left;\n\tposition: relative;\n\twidth: 250px;\n\tmargin: 7px;\n\tborder: 1px solid #ccc;\n}\n.a-title {\n\tfont-size: 20px;\n\tpadding: 7px;\n\twidth: 236px;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\tborder-bottom: 1px solid #ccc;\n}\n.a-author,\n.a-time,\n.a-views,\n.a-content,\n.a-tags {\n\tfont-size: 13px;\n\tline-height: 20px;\n\tpadding: 1px 5px;\n}\n.article .el-badge__content.is-fixed {\n\tz-index: 3;\n\tright: 30px;\n}\n.a-content {\n\tdisplay: -webkit-box !important;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\tword-break: break-all;\n\t-webkit-box-orient: vertical;\n\t-webkit-line-clamp: 3;\n}\n.a-tags {\n\tbackground-color: #fff;\n}\n.a-tags span {\n\tdisplay: inline-block;\n\tfont-size: 13px;\n\tborder: 1px solid #20A0FF;\n\tpadding: 2px 10px;\n\tmargin: 1px 0;\n\tborder-radius: 40px;\n\tcursor: pointer;\n\tcolor: #1D8CE0;\n\tmax-width: 218px;\n\toverflow: hidden;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n}\n.a-operation {\n\tpadding: 5px;\n}\n.a-operation .el-button {\n\tmargin-left: 5px;\n\tpadding: 7px;\n}\n"],
             sourceRoot: ""
         }])
     }, 116: function (t, n, e) {
@@ -186,14 +196,14 @@ webpackJsonp([0], {
                 }), t._v(" "), e("div", {staticClass: "labels"}, [e("el-form", {
                     ref: "dialog.form",
                     attrs: {model: t.article, "label-width": "80px"}
-                }, [e("el-form-item", {attrs: {label: "文章标签"}}, [t._l(t.article.tags, function (n) {
+                }, [e("el-form-item", {attrs: {label: "文章标签"}}, [t._l(t.article.tagSet, function (n) {
                     return e("el-tag", {
-                        key: n, attrs: {closable: !0, "close-transition": !1}, on: {
+                        key: n.name, attrs: {closable: !0, "close-transition": !1}, on: {
                             close: function (e) {
                                 t.handleClose(n)
                             }
                         }
-                    }, [t._v("\n\t\t\t\t\t" + t._s(n) + "\n\t\t\t\t")])
+                    }, [t._v("\n\t\t\t\t\t" + t._s(n.name) + "\n\t\t\t\t")])
                 }), t._v(" "), e("el-autocomplete", {
                     ref: "saveTagInput",
                     attrs: {"fetch-suggestions": t.querySearchTag, placeholder: "请输入标签", "trigger-on-focus": !1},
@@ -222,12 +232,12 @@ webpackJsonp([0], {
         t.exports = {
             render: function () {
                 var t = this, n = t.$createElement, e = t._self._c || n;
-                return e("div", {staticClass: "articlesList diyscrollbar"}, t._l(t.articles, function (n) {
+                return e("div", {staticClass: "articlesList diyscrollbar"}, [t._l(t.articles, function (n) {
                     return e("div", {staticClass: "article"}, [e("el-badge", {
                         staticClass: "item",
                         attrs: {value: 1 == n.state ? "未发表" : ""}
-                    }, [e("div", {staticClass: "a-title"}, [t._v(t._s(n.title))])]), t._v(" "), e("div", {staticClass: "a-author"}, [t._v("\n\t\t\t作者 : " + t._s(n.author) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-time"}, [t._v("\n\t\t\t发布时间 : " + t._s(n.time) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-views"}, [t._v("\n\t\t\t浏览次数 : " + t._s(n.views) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-content"}, [t._v("\n\t\t\t内容摘要 : " + t._s(n.content) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-tags"}, [t._v("\n\t\t\t文章标签 : "), e("br"), t._v(" "), t._l(n.tags, function (n) {
-                        return e("span", [t._v("\n\t\t\t\t" + t._s(n) + "\n\t\t\t")])
+                    }, [e("div", {staticClass: "a-title"}, [t._v(t._s(n.title))])]), t._v(" "), e("div", {staticClass: "a-author"}, [t._v("\n\t\t\t作者 : " + t._s(n.author) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-time"}, [t._v("\n\t\t\t发布时间 : " + t._s(n.time) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-views"}, [t._v("\n\t\t\t浏览次数 : " + t._s(n.views) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-content"}, [t._v("\n\t\t\t内容摘要 : " + t._s(n.content) + "\n\t\t")]), t._v(" "), e("div", {staticClass: "a-tags"}, [t._v("\n\t\t\t文章标签 : "), e("br"), t._v(" "), t._l(n.tagSet, function (n) {
+                        return e("span", [t._v("\n\t\t\t\t" + t._s(n.name) + "\n\t\t\t")])
                     })], 2), t._v(" "), e("div", {staticClass: "a-operation"}, [e("el-button", {
                         attrs: {
                             type: "info",
@@ -250,7 +260,15 @@ webpackJsonp([0], {
                             }
                         }
                     })], 1)], 1)
-                }))
+                }), t._v(" "), e("div", {staticClass: "fixclear"}), t._v(" "), e("div", {staticClass: "paging"}, [e("el-pagination", {
+                    attrs: {
+                        "current-page": t.currentPage,
+                        "page-sizes": [30, 60, 80, 100, 500, 1e3],
+                        "page-size": 30,
+                        layout: "total, sizes, prev, pager, next, jumper",
+                        total: t.totalArticles
+                    }, on: {"size-change": t.handleSizeChange, "current-change": t.handleCurrentChange}
+                })], 1)], 2)
             }, staticRenderFns: []
         }
     }, 148: function (t, n) {
@@ -263,8 +281,11 @@ webpackJsonp([0], {
                         btnText: "添加文章"
                     }, on: {addBtn: t.addArticle, search: t.searchArticleAction}
                 }), t._v(" "), e("articles-list", {
-                    attrs: {articles: t.articlesList},
-                    on: {amend: t.amendArticle, read: t.readArticle}
+                    attrs: {
+                        totalArticles: t.totalArticles,
+                        currentPage: t.currentPage,
+                        articles: t.articlesList
+                    }, on: {getArticles: t.getArticles, amend: t.amendArticle, read: t.readArticle}
                 })], 1), t._v(" "), e("el-dialog", {
                     attrs: {title: t.dialog.title, top: "10px", size: "full"},
                     model: {
@@ -272,7 +293,10 @@ webpackJsonp([0], {
                             t.dialog.control = n
                         }, expression: "dialog.control"
                     }
-                }, [e("article-write", {attrs: {article: t.dialog.article}, on: {close: t.closeDialog}})], 1)], 1)
+                }, [e("article-write", {
+                    attrs: {article: t.dialog.article},
+                    on: {getArticles: t.getArticles, close: t.closeDialog}
+                })], 1)], 1)
             }, staticRenderFns: []
         }
     }, 80: function (t, n, e) {
@@ -336,34 +360,40 @@ webpackJsonp([0], {
     }, 98: function (t, n, e) {
         "use strict";
         Object.defineProperty(n, "__esModule", {value: !0});
-        var i = e(136), o = e.n(i), a = e(89), s = e.n(a), r = e(137), l = e.n(r);
+        var i = e(136), a = e.n(i), o = e(89), r = e.n(o), l = e(137), s = e.n(l);
         n.default = {
             name: "articlesList",
-            components: {"list-top": s.a, "articles-list": l.a, "article-write": o.a},
+            components: {"list-top": r.a, "articles-list": s.a, "article-write": a.a},
             data: function () {
-                return {dialog: {article: {}, title: "", control: !1}, articlesList: []}
+                return {
+                    dialog: {article: {}, title: "", control: !1},
+                    currentPage: 1,
+                    totalArticles: 200,
+                    articlesList: [],
+                    currentNum: 0
+                }
             },
             created: function () {
                 this.getArticles()
             },
             methods: {
-                getArticles: function () {
-                    var t = this;
-                    console.log("获取全部文章mmmm"), this.$http.get("admin/article").then(function (n) {
-                        console.log(n.data), t.tagsList.push.apply(t.tagsList, n.data)
-                    }, function (n) {
-                        t.$message.error("获取文章失败")
+                getArticles: function (t) {
+                    var n = this;
+                    this.currentNum = t, console.log("获取全部文章mmmm"), this.$http.get("admin/article").then(function (t) {
+                        console.log(t.data), n.articlesList = t.data
+                    }, function (t) {
+                        n.$message.error("获取文章失败")
                     })
                 }, readArticle: function () {
                 }, addArticle: function () {
                     this.dialog.article = {
                         title: "",
-                        tags: [],
+                        tagSet: [],
                         state: 1,
                         content: ""
-                    }, this.openDialog(), this.dialog.title = "添加文章", createdEditormd("editormd", ""), testEditor.settings.markdown = " "
+                    }, this.openDialog(), this.dialog.title = "添加文章", "undefined" != !testEditor.settings ? createdEditormd("editormd", " ") : testEditor.settings.markdown = " "
                 }, amendArticle: function (t) {
-                    this.dialog.article = t, this.openDialog(), this.dialog.title = "修改文章", console.log(t.content), createdEditormd("editormd", t.content), testEditor.settings.markdown = t.content
+                    this.dialog.article = t, this.openDialog(), this.dialog.title = "修改文章", console.log(t.content), "undefined" != testEditor.settings ? createdEditormd("editormd") : testEditor.settings.markdown = t.content
                 }, searchArticleAction: function (t) {
                 }, closeDialog: function () {
                     this.dialog.control = !1
@@ -374,4 +404,4 @@ webpackJsonp([0], {
         }
     }
 });
-//# sourceMappingURL=0.d8a20561f6acd14ec0d3.js.map
+//# sourceMappingURL=0.f4bc0e13a8e68f83abee.js.map
