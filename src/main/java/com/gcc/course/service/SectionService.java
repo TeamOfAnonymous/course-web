@@ -2,6 +2,7 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
+import com.gcc.course.utils.WebResult;
 
 import java.util.List;
 import java.util.Set;
@@ -11,15 +12,15 @@ import java.util.Set;
  */
 public interface SectionService {
 
-    Section save(Section section);
+    WebResult save(Section section);
 
-    Section get(String id);
+    WebResult get(String id);
 
-    List<Section> findAll();
+    WebResult findAll();
 
-    boolean remove(Section section);
+    WebResult remove(String id);
 
-    Section update(Section section);
+    WebResult update(Section section);
 
-    Set<Section> findByCourse(Course course);
+    WebResult findByCourse(Course course);
 }

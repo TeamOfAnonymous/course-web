@@ -3,6 +3,7 @@ package com.gcc.course.service.impl;
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
 import com.gcc.course.repository.CourseRepository;
+import com.gcc.course.repository.SectionRepository;
 import com.gcc.course.service.CourseService;
 import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.WebResult;
@@ -28,7 +29,10 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
     @Autowired
-    private SectionService sectionService ;
+    private SectionRepository sectionRepository;
+    @Autowired
+    private SectionService sectionService;
+
 
     @Override
     @Transactional
@@ -88,10 +92,16 @@ public class CourseServiceImpl implements CourseService {
          return WebResult.ok(result);
     }
 
+    @Override
+    public WebResult findByName(String name) {
+        Set<Course> courses = courseRepository.findByNameLike("%" + name + "%" );
+        return WebResult.ok(courses);
+    }
+
 
     private Course insetSections(Course course){
         if( null == course){
-            Set<Section> sections = sectionService.findByCourse(course);
+            Set<Section> sections = sectionRepository.findByCourse(course);
             course.setSections(sections);
         }
         return course;

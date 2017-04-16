@@ -50,10 +50,8 @@ public class CourseAdminController {
     }
 
     @GetMapping("list")
-    @ApiOperation(value = "分页查找课程  currentNum=当前数据条数  rows=获取的条数" )
-    public WebResult getAll(@RequestParam int currentNum , @RequestParam int rows) {
-        // 算出下一页的页码 （第一页页码为0）
-        int page = currentNum / rows ;
+    @ApiOperation(value = "分页查找课程  currentNum=获取页的页码（第一页页码为0）  rows=获取的条数" )
+    public WebResult getAll(@RequestParam int page , @RequestParam int rows) {
         return courseServiceImpl.getPageList( page , rows );
     }
 }
