@@ -88,6 +88,12 @@ public class CourseServiceImpl implements CourseService {
          return WebResult.ok(result);
     }
 
+    @Override
+    public WebResult findByName(String name) {
+        Set<Course> courses = courseRepository.findByNameLike("%" + name + "%" );
+        return WebResult.ok(courses);
+    }
+
 
     private Course insetSections(Course course){
         if( null == course){
