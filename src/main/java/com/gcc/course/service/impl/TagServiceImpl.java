@@ -36,4 +36,9 @@ public class TagServiceImpl implements TagService {
 		return newTags;
 	}
 
+	@Override
+	public Tag findById(String id) {
+		return tagRepository.findOne(id);
+	}
+
 }

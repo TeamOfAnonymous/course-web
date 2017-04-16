@@ -10,4 +10,8 @@ import java.util.Set;
  */
 public interface TagService {
 	Set<Tag> saveBySet(Set<Tag> tags);
+
+	Tag findById(String id);
+
+
 }
