@@ -36,8 +36,8 @@ public class ArticleServiceTest {
         article.setTitle("测试3");
         article.setMdContent("测试3");
 
-        article.getTags().add(new Tag("HTML基础"));
-        article.getTags().add(new Tag("HTML标签"));
+        article.getTagSet().add(new Tag("HTML基础"));
+        article.getTagSet().add(new Tag("HTML标签"));
 
         WebResult webResult = articleService.save(article);
         assertThat(webResult).isNotNull();
