@@ -22,7 +22,7 @@ public class Section extends BaseEntity {
     private String description; // 简介
     private int orderIndex; // 排列序号，表示同级类目的展现次序，如数值相等则按名称次序排列。取值范围:大于零的整数
 
-    @JsonFormat(pattern = "yyyy/MM/dd")
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime addTime; // 添加时间
 
     @ManyToOne
