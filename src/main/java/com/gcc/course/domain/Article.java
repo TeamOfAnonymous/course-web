@@ -40,7 +40,7 @@ public class Article extends BaseEntity {
     private Integer state; //文章状态，1为发布，0为未发布
 
     @Transient
-    private String tagStr;
+    private Set<Tag> tagSet = new HashSet<>();
 
     public Article() {
         this.publishedTime = LocalDateTime.now();
@@ -87,11 +87,11 @@ public class Article extends BaseEntity {
         this.state = state;
     }
 
-    public String getTagStr() {
-        return tagStr;
+    public Set<Tag> getTagSet() {
+        return tagSet;
     }
 
-    public void setTagStr(String tagStr) {
-        this.tagStr = tagStr;
+    public void setTagSet(Set<Tag> tagSet) {
+        this.tagSet = tagSet;
     }
 }

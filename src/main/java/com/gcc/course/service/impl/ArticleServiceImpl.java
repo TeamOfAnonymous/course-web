@@ -36,6 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
     public WebResult save(Article article) {
         WebResult webResult = null;
         String id = article.getId();
+        article.setTags(article.getTagSet());
         article.setTags(tagServiceImpl.saveBySet(article.getTags()));
         articleRepository.save(article);
         if (null == id || "".equals(id)) {
@@ -63,6 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         //将文章状态设置为发布
         article.setState(1);
+        article.setTags(article.getTagSet());
         article.setTags(tagServiceImpl.saveBySet(article.getTags()));
         articleRepository.save(article);
         webResult = new WebResult(1, "文章发布成功", article);
@@ -149,6 +151,8 @@ public class ArticleServiceImpl implements ArticleService {
     public WebResult update(Article article) {
         WebResult webResult = null;
         if (articleRepository.findOne(article.getId()) != null) {
+            article.setTags(article.getTagSet());
+            article.setTags(tagServiceImpl.saveBySet(article.getTags()));
             articleRepository.save(article);
             webResult = new WebResult(1, "文章修改成功", article);
         } else {
