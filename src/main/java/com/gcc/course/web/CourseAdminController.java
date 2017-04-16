@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 /**
  * Created by WangZK on 2017/3/20.
  */
@@ -50,8 +52,14 @@ public class CourseAdminController {
     }
 
     @GetMapping("list")
-    @ApiOperation(value = "分页查找课程  currentNum=获取页的页码（第一页页码为0）  rows=获取的条数" )
+    @ApiOperation(value = "分页查找课程  page=获取页的页码（第一页页码为0）  rows=获取的条数" )
     public WebResult getAll(@RequestParam int page , @RequestParam int rows) {
         return courseServiceImpl.getPageList( page , rows );
+    }
+
+    @GetMapping("findPageListByName")
+    @ApiOperation(value = "分页查找课程,age=获取页的页码（第一页页码为0)->默认为0,rows=获取的条数->默认为10")
+            public WebResult findPageListByName(@RequestParam(defaultValue = "",required = false) String name ,@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int rows) {
+        return courseServiceImpl.findPageListByName( name.trim() , page , rows );
     }
 }

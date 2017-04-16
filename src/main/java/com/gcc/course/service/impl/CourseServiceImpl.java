@@ -7,12 +7,8 @@ import com.gcc.course.service.CourseService;
 import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.List;
@@ -89,9 +85,23 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public WebResult findByName(String name) {
-        Set<Course> courses = courseRepository.findByNameLike("%" + name + "%" );
-        return WebResult.ok(courses);
+    @Transactional
+    public WebResult findPageListByName(String name , int page , int rows ) {
+        Course course = new Course();
+        course.setName( name );
+        // 定义查询规则
+        ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withIgnorePaths("addTime")    // 忽略添加时间
+                .withIgnorePaths("imgUrl")     // 忽略图片链接
+                .withIgnorePaths("prompt")     // 忽略提示
+                .withIgnorePaths("sortOrder")     // 忽略排序数
+                .withIgnorePaths("description")    // 忽略描述
+                .withIgnoreNullValues()
+                ;
+        Example example = Example.of(course , matcher);
+        Page resultPage = courseRepository.findAll(example, new PageRequest( page , rows ));
+        return WebResult.ok(resultPage);
     }
 
 

@@ -20,4 +20,6 @@ public interface CourseService {
     WebResult findAll();
 
     WebResult getPageList(int page, int rows);
+
+    WebResult findPageListByName(String name , int page , int rows );
 }
