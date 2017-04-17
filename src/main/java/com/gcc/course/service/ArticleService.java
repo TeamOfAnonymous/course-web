@@ -23,6 +23,9 @@ public interface ArticleService {
 
     //获取文章列表
     List<Article> get();
+    
+    //获取分页的文章列表
+    Page<Article> get(Integer page, Integer size, String searchStr);
 
     //根据id获取文章
     Article get(String id);
