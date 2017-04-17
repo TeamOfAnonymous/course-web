@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface FileUploadService {
 
-    EditerImageResult imageUpload(MultipartFile multipartFile);
+    EditorImageResult imageUpload(MultipartFile multipartFile);
 
-    EditerImageResult imageUploadAgain(MultipartFile multipartFile);
+    EditorImageResult imageUploadAgain(MultipartFile multipartFile);
 
 }
