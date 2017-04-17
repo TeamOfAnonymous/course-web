@@ -71,4 +71,10 @@ public class ArticleAdminController {
     public List<Article> get() {
         return articleServiceImpl.get();
     }
+    
+    @GetMapping("getArticlesByPage")
+    @ApiOperation(value = "获取分页的文章列表")
+    public Page<Article> get(@RequestParam Integer page, @RequestParam Integer size, @RequestParam String searchStr) {
+        return articleServiceImpl.get(page, size, searchStr);
+    }
 }
