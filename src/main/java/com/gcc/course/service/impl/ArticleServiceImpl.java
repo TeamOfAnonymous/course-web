@@ -103,6 +103,17 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> get() {
         return articleRepository.findAll();
     }
+    
+    /**
+     * 获取分页的文章列表
+     *
+     * @return
+     */
+    @Override
+    public Page<Article> get(Integer page, Integer size, String searchStr) {
+        Pageable pageable = PageUtil.basicPage(page, size);
+        return articleRepository.findAll(pageable);
+    }
 
     /**
      * 根据id查找文章
