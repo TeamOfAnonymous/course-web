@@ -3,6 +3,7 @@ package com.gcc.course.service;
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Tag;
 import com.gcc.course.utils.WebResult;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Set;
