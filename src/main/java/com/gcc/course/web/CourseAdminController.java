@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("admin/course")
-@Api(value = "课程服务" , description = "提供课程的 增删改查 服务")
+@Api(value = "课程后台服务" , description = "提供课程的 增删改查 功能")
 public class CourseAdminController {
 
     @Autowired
@@ -52,13 +52,13 @@ public class CourseAdminController {
     }
 
     @GetMapping("list")
-    @ApiOperation(value = "分页查找课程  page=获取页的页码（第一页页码为0）  rows=获取的条数" )
-    public WebResult getAll(@RequestParam int page , @RequestParam int rows) {
+    @ApiOperation(value = "分页查找课程,page=获取页的页码（第一页页码为0)->默认为0,rows=获取的条数->默认为10" )
+    public WebResult getAll(@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int rows) {
         return courseServiceImpl.getPageList( page , rows );
     }
 
     @GetMapping("findPageListByName")
-    @ApiOperation(value = "分页查找课程,age=获取页的页码（第一页页码为0)->默认为0,rows=获取的条数->默认为10")
+    @ApiOperation(value = "分页查找课程(匹配 name ),page=获取页的页码（第一页页码为0)->默认为0,rows=获取的条数->默认为10")
             public WebResult findPageListByName(@RequestParam(defaultValue = "",required = false) String name ,@RequestParam(defaultValue = "0") int page , @RequestParam(defaultValue = "10") int rows) {
         return courseServiceImpl.findPageListByName( name.trim() , page , rows );
     }
