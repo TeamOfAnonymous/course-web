@@ -5,7 +5,7 @@
 		<meta charset="utf-8"/>
 		<title>gcweb</title>
 		<link href="vendor/editor.md-master/css/editormd.min.css" rel="stylesheet"/>
-		<link href="css/app.5fd994941de5d40df4cc364edd4f5a2e.css" rel="stylesheet"/>
+		<link href="./css/app.5fd994941de5d40df4cc364edd4f5a2e.css" rel="stylesheet"/>
 	</head>
 
 	<body>
@@ -13,9 +13,10 @@
 		<script type="text/javascript" src="vendor/editor.md-master/src/jquery.min.js"></script>
 		<script type="text/javascript" src="vendor/editor.md-master/src/editormd.js"></script>
 		<script>
-			var testEditor;
+			var testEditor = {};
 
 			function createdEditormd(domId, article) {
+				//if(testEditor.settings === undefined) {
 				$.get("", function() {
 					testEditor = editormd(domId, {
 						width: "calc(100% - 2px)",
@@ -50,12 +51,20 @@
 
 						}
 					});
-				});
+				})
+				/*	} else {
+						setTimeout(function(){
+							testEditor.clear();
+							testEditor.insertValue(article);
+						},1)
+						
+					}*/
+
 			}
 		</script>
-		<script type="text/javascript" src="./js/manifest.9eb786e8efd40dd0174c.js"></script>
-		<script type="text/javascript" src="./js/vendor.a56bb33dcab959ef9243.js"></script>
-		<script type="text/javascript" src="./js/app.2236c1b6935fd35d755f.js"></script>
+		<script type="text/javascript" src="./js/manifest.c46150da151ecce7cf36.js"></script>
+		<script type="text/javascript" src="./js/vendor.ca665976d4310c82b2b2.js"></script>
+		<script type="text/javascript" src="./js/app.3667c3c32d49ce211366.js"></script>
 	</body>
 
 </html>

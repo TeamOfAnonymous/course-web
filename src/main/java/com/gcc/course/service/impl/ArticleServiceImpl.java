@@ -106,7 +106,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> get() {
         return articleRepository.findAll();
     }
-    
+
     /**
      * 获取分页的文章列表
      *
@@ -115,7 +115,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Page<Article> get(Integer page, Integer size, String searchStr) {
         Pageable pageable = PageUtil.basicPage(page, size);
-        return articleRepository.findAll(pageable);
+        Page<Article> articles = articleRepository.findByStatus(0, pageable);
+        return articles;
     }
 
     /**
