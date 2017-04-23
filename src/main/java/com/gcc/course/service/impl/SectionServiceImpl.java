@@ -58,7 +58,14 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public WebResult remove(String id) {
-        return WebResult.ok(this.sectionRepository.findOne(id).delete());
+        Section section = this.sectionRepository.findOne(id);
+        try {
+            section.delete();
+            this.sectionRepository.save(section);
+        } catch (Exception e) {
+            return WebResult.ok(false);
+        }
+        return WebResult.ok(true);
     }
 
     @Override
