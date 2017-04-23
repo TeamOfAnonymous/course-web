@@ -38,6 +38,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult get(String id) {
         Course course = courseRepository.findOne(id);
+        course = insertSection(course) ;
         return WebResult.ok(course) ;
     }
 
@@ -73,6 +74,7 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult findAll() {
         List<Course> courses = courseRepository.findAll();
+        courses = insertSection(courses);
         return WebResult.ok( courses ) ;
     }
 
@@ -81,6 +83,8 @@ public class CourseServiceImpl implements CourseService {
     public WebResult getPageList(int page, int rows){
         Pageable pageable = new PageRequest( page , rows ) ;
         Page<Course> result = courseRepository.findAll(pageable);
+        List<Course> courses = result.getContent();
+        courses = insertSection(courses);
          return WebResult.ok(result);
     }
 
@@ -101,7 +105,24 @@ public class CourseServiceImpl implements CourseService {
                 ;
         Example example = Example.of(course , matcher);
         Page resultPage = courseRepository.findAll(example, new PageRequest( page , rows ));
+        List<Course> courses = resultPage.getContent();
+        courses = insertSection(courses);
         return WebResult.ok(resultPage);
+    }
+
+
+    private Course insertSection(Course course){
+        course.setSections( sectionService.findByCourse(course) );
+        return course;
+    }
+
+    private List<Course> insertSection(List<Course> courses){
+        if( courses.size() > 0 ){
+            for(Course course : courses){
+                insertSection(course);
+            }
+        }
+        return courses;
     }
 
 }
