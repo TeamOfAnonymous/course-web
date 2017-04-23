@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("admin/course")
-@Api(value = "课程的后台管理Controller")
+@Api(value = "课程服务" , description = "提供课程的 增删改查 服务")
 public class CourseAdminController {
 
     @Autowired

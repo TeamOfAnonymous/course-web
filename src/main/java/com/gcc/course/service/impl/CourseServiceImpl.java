@@ -25,8 +25,6 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseRepository courseRepository;
     @Autowired
-    private SectionRepository sectionRepository;
-    @Autowired
     private SectionService sectionService;
 
 
@@ -40,7 +38,6 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult get(String id) {
         Course course = courseRepository.findOne(id);
-        insetSections(course);
         return WebResult.ok(course) ;
     }
 
@@ -58,10 +55,11 @@ public class CourseServiceImpl implements CourseService {
         if( item != null){
             if( item.getSections().size() > 0 ){
                 Iterator<Section> sections = item.getSections().iterator();
-                while( sections.hasNext() ){
-                    Section section = sections.next();
-                    section.delete();
-                    sectionService.save(section);
+                while( sections.hasNext()  ){
+                    boolean delFlag = (boolean) sectionService.remove( sections.next().getId() ).getData();
+                    if( !delFlag ){
+                        throw new RuntimeException("删除课程出现错误 : " + sections.next().getName() + " 章节删除失败" );
+                    }
                 }
             }
         }
@@ -75,7 +73,6 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult findAll() {
         List<Course> courses = courseRepository.findAll();
-        insetSections(courses);
         return WebResult.ok( courses ) ;
     }
 
@@ -84,7 +81,6 @@ public class CourseServiceImpl implements CourseService {
     public WebResult getPageList(int page, int rows){
         Pageable pageable = new PageRequest( page , rows ) ;
         Page<Course> result = courseRepository.findAll(pageable);
-        insetSections( result.getContent() );
          return WebResult.ok(result);
     }
 
@@ -108,20 +104,4 @@ public class CourseServiceImpl implements CourseService {
         return WebResult.ok(resultPage);
     }
 
-
-    private Course insetSections(Course course){
-        if( null == course){
-            Set<Section> sections = sectionRepository.findByCourse(course);
-            course.setSections(sections);
-        }
-        return course;
-    }
-    private List<Course> insetSections(List<Course> courses){
-        if( courses.size() > 0 ){
-            for(Course course : courses){
-                insetSections(course);
-            }
-        }
-        return courses;
-    }
 }

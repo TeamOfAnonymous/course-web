@@ -87,10 +87,11 @@ public class CourseServiceTest {
 
     @Test
     public void testSaveSection(){
-        Course course = (Course) courseService.get("4b831565-1829-4547-a452-5bc35789eeea").getData();
+        Course course = (Course) courseService.get("a72c2a7e-9d51-4316-ad15-bf13e70683c4").getData();
         course.setDescription("已修改");
         Section section = new Section();
         section.setName("测试章节2");
+        section.setCourseId("a72c2a7e-9d51-4316-ad15-bf13e70683c4");
         section.setCourse(course);
         sectionService.save(section);
     }
