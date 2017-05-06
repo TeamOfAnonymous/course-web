@@ -48,13 +48,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserNameAndPassword(String userName, String password) {
         User user = null;
-        try {
-            user = userRepository.findByUserNameAndPassword(userName, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return user;
-        }
+            user = userRepository.findByUserName(userName);
+            if(user!=null){
+                if(user.getPassword().equals(password.trim())){
+                    return user;
+                }
+            }
+        return null;
     }
 
     /**
@@ -98,7 +98,9 @@ public class UserServiceImpl implements UserService {
         try {
             User user = userRepository.findOne(id);
             if (user != null) {
-                userRepository.update(user.getId(), LocalDateTime.now(), 1);
+                user.delete();
+                userRepository.save(user);
+                //userRepository.update(user.getId(), LocalDateTime.now(), 1);
             } else {
                 return false;
             }
@@ -120,7 +122,9 @@ public class UserServiceImpl implements UserService {
         try {
             User user = userRepository.findOne(id);
             if (user != null) {
-                userRepository.update(user.getId(), null, 0);
+                user.setStatus(0);
+                userRepository.save(user);
+                //userRepository.update(user.getId(), null, 0);
             } else {
                 return false;
             }

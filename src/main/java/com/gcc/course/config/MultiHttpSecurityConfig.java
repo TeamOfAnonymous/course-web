@@ -29,7 +29,7 @@ public class MultiHttpSecurityConfig {
         private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
         // 静态资源访问的 url
-        private String[] staticFileUrl = {"/css/**","/fonts/**","/img/**","/js/**","/url/**","/vendor/**"};
+        private String[] staticFileUrl = {"/css/**","/fonts/**","/img/**","**.js","/js/**","/url/**","/vendor/**"};
         // 不用认证就可访问的 url
         private String[] permitUrl = {"/","/authentication/auth","/goAdminLogin","/goHomePage"};
 
@@ -49,7 +49,8 @@ public class MultiHttpSecurityConfig {
                     .antMatchers("/admin/**").hasAuthority(String.valueOf(AuthorityName.ROLE_ADMIN))
                     .anyRequest().authenticated();
 
-            // 配置登陆信息
+
+                    // 配置登陆信息
             http
                     .formLogin()
                     .permitAll()
