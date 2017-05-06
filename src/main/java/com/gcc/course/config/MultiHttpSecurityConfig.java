@@ -30,12 +30,11 @@ public class MultiHttpSecurityConfig {
         // 静态资源访问的 url
         private String[] staticFileUrl = {"/css/**","/fonts/**","/img/**","/js/**","/url/**","/vendor/**"};
         // 不用认证就可访问的 url
-        private String[] permitUrl = {"/*","/authentication/auth"};
+        private String[] permitUrl = {"/*","/authentication/auth","/goAdminLogin","/goHomePage"};
 
         @Override
         public void configure(WebSecurity web) throws Exception {
             web.ignoring().antMatchers(staticFileUrl);
-            super.configure(web);
         }
 
         @Override
@@ -45,7 +44,7 @@ public class MultiHttpSecurityConfig {
             // 访问url认证
             http
                     .authorizeRequests()
-                    .antMatchers("permitUrl").permitAll()
+                    .antMatchers(permitUrl).permitAll()
                     .antMatchers("/admin/**").hasAnyRole("ADMIN")
                     .anyRequest().authenticated();
 
