@@ -1,4 +1,4 @@
-package com.gcc.course;
+package com.gcc.course.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,8 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("精品课程后端接口")
+                .title("精品课程")
+                .description("精品课程 Rest API 文档 ")
                 .version("1.0.1")
                 .build();
     }
