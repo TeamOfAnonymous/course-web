@@ -2,6 +2,7 @@ package com.gcc.course.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class User extends BaseEntity {
 
     public User() {
         this.addTime = LocalDateTime.now();
+        this.lastPasswordResetDate = new Date();
     }
 
 
@@ -46,6 +48,7 @@ public class User extends BaseEntity {
     }
 
     public void setPassword(String password) {
+        this.lastPasswordResetDate = new Date();
         this.password = password;
     }
 
