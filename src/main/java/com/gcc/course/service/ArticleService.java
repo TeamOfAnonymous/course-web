@@ -42,4 +42,10 @@ public interface ArticleService {
 
     //通过文章id获取标签
     Set<Tag> getTags(String id);
+
+    //根据标签id获取文章
+    Page<Article> getArticlesByTagForPage(String tid, Integer page, Integer size);
+
+    //获取分页的文章列表
+    Page<Article> getArticlesForPage(Integer page, Integer size);
 }

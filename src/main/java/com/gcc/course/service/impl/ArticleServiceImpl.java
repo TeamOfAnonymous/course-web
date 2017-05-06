@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -219,4 +220,22 @@ public class ArticleServiceImpl implements ArticleService {
             return false;
         }
     }
+
+    //根据标签id获取文章
+    public Page<Article> getArticlesByTagForPage(String tid, Integer page, Integer size) {
+        Tag tag = new Tag();
+        tag.setId(tid);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(tag);
+        Pageable pageable = PageUtil.basicPage(page, size);
+        return articleRepository.findByTags(tags, pageable);
+    }
+
+    //获取分页的文章列表
+    @Override
+    public Page<Article> getArticlesForPage(Integer page, Integer size) {
+        Pageable pageable = PageUtil.basicPage(page, size);
+        return articleRepository.findAll(pageable);
+    }
+
 }

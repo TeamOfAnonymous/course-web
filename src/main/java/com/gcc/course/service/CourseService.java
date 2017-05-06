@@ -2,6 +2,7 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Course;
 import com.gcc.course.utils.WebResult;
+import org.springframework.data.domain.Page;
 
 /**
  * Created by huangMP on 2017/3/30.
@@ -21,5 +22,10 @@ public interface CourseService {
 
     WebResult getPageList(int page, int rows);
 
-    WebResult findPageListByName(String name , int page , int rows );
+    WebResult findPageListByName(String name, int page, int rows);
+
+    Page<Course> getCoursesForPage(Integer page, Integer size, String search);
+
+    //根据id获取文章
+    Course findById(String id);
 }
