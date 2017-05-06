@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean update(User user) {
         try {
-            userRepository.update(user.getId(), user.getUserName(), user.getPassword(), user.getAuthority());
+            userRepository.update(user.getId(), user.getUserName(), user.getPassword(), user.getAuthorities().toString());
         } catch (Exception e) {
             return false;
         } finally {
