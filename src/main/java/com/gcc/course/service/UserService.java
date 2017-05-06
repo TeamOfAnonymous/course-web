@@ -23,4 +23,6 @@ public interface UserService {
     boolean recovery(String id);
 
     WebResult updatePassword(String username, String oldPassword, String newPassword);
+
+    WebResult get(String id);
 }

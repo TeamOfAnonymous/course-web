@@ -12,13 +12,19 @@ import java.util.List;
 @Entity
 public class Authority {
 
+    public Authority() {
+    }
+
+    public Authority(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(generator = "UUID2_GENERATOR")
     private String id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private AuthorityName name;
+    private String name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -32,11 +38,11 @@ public class Authority {
         this.id = id;
     }
 
-    public AuthorityName getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(AuthorityName name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -46,5 +52,14 @@ public class Authority {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "id='" + id + '\'' +
+                ", name=" + name +
+                ", users=" + users +
+                '}';
     }
 }

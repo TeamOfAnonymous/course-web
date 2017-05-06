@@ -1,5 +1,6 @@
 package com.gcc.course.config;
 
+import com.gcc.course.domain.AuthorityName;
 import com.gcc.course.security.JwtAuthenticationEntryPoint;
 import com.gcc.course.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class MultiHttpSecurityConfig {
             http
                     .authorizeRequests()
                     .antMatchers(permitUrl).permitAll()
-                    .antMatchers("/admin/**").hasAnyRole("ADMIN")
+                    .antMatchers("/admin/**").hasAuthority(String.valueOf(AuthorityName.ROLE_ADMIN))
                     .anyRequest().authenticated();
 
             // 配置登陆信息

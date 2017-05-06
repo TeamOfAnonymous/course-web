@@ -1,5 +1,6 @@
 package com.gcc.course.service.impl;
 
+import com.gcc.course.domain.AuthorityName;
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
 import com.gcc.course.domain.Tag;
@@ -7,11 +8,10 @@ import com.gcc.course.repository.CourseRepository;
 import com.gcc.course.repository.SectionRepository;
 import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.SectionService;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -77,4 +77,5 @@ public class SectionServiceImpl implements SectionService {
     public Set<Section> findByCourse(Course course){
         return sectionRepository.findByCourse(course);
     }
+
 }

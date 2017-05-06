@@ -50,4 +50,5 @@ public interface UserRepository extends JpaRepository<User, String> {
     void update(String id, LocalDateTime deletedTime, int status);
 
     User findByUserName(String username);
+
 }

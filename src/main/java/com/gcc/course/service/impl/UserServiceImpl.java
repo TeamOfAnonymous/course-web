@@ -1,11 +1,14 @@
 package com.gcc.course.service.impl;
 
+import com.gcc.course.domain.Authority;
 import com.gcc.course.domain.User;
 import com.gcc.course.repository.UserRepository;
+import com.gcc.course.service.AuthorityService;
 import com.gcc.course.service.UserService;
 import com.gcc.course.web.dto.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +23,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * 创建用户
@@ -28,6 +33,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public WebResult save(User user) {
+        user = saveUserAuthorities(user);
         user = userRepository.save(user);
         return WebResult.ok(user);
     }
@@ -76,6 +82,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public WebResult update(User user) {
+        user = saveUserAuthorities(user);
         user = userRepository.save(user);
         return WebResult.ok(user);
     }
@@ -135,6 +142,31 @@ public class UserServiceImpl implements UserService {
             }
         }
         return new WebResult(500,"用户信息有误",user);
+    }
+
+    @Override
+    public WebResult get(String id) {
+        return WebResult.ok(userRepository.findOne(id));
+    }
+
+    /**
+     * 保存用户的时候先把 其权限保存了
+     * @param user
+     * @return
+     */
+    public User saveUserAuthorities(User user){
+        List<Authority> authorities = user.getAuthorities();
+        if(authorities.size()>0){
+            for(Authority authority : authorities){
+                Authority authorityInDB = (Authority) authorityService.fingByName( authority.getName() ).getData();
+                if( authorityInDB == null){
+                    authorityService.save(authority);
+                }else{
+                    authority.setId(authorityInDB.getId());
+                }
+            }
+        }
+        return user;
     }
 
 

@@ -3,7 +3,7 @@ package com.gcc.course.service.impl;
 import com.gcc.course.domain.Image;
 import com.gcc.course.repository.ImageRepository;
 import com.gcc.course.service.FileUploadService;
-import com.gcc.course.utils.EditorImageResult;
+import com.gcc.course.web.dto.EditorImageResult;
 import com.gcc.course.utils.FileUploadUtil;
 import com.gcc.course.utils.Md5Util;
 import com.gcc.course.utils.UuidUtil;

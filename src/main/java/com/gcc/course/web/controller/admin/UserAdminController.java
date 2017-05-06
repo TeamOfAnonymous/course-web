@@ -37,4 +37,11 @@ public class UserAdminController {
         return userServiceImpl.updatePassword( username , oldPassword,newPassword);
     }
 
+    @GetMapping("{id}")
+    @ApiOperation(value = "通过id查找用户")
+    public WebResult get(@PathVariable String id){
+        return userServiceImpl.get(id);
+
+    }
+
 }
