@@ -118,7 +118,7 @@ public class CourseServiceTest {
     @Test
     public void testSection(){
         Course course = (Course) courseService.get("4b831565-1829-4547-a452-5bc35789eeea").getData();
-        WebResult result = sectionService.findByCourse(course);
-        System.out.println(result.getData().toString());
+        //WebResult result = sectionService.findByCourse(course);
+        //System.out.println(result.getData().toString());
     }
 }

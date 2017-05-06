@@ -15,7 +15,7 @@ import java.util.Set;
  * decription : 章节实体
  */
 @Entity
-//@JsonIgnoreProperties(value = {"course"})
+@Where(clause = "status != 1")
 public class Section extends BaseEntity {
 
     private String name; // 名称
@@ -32,7 +32,8 @@ public class Section extends BaseEntity {
     @Cascade(CascadeType.SAVE_UPDATE)
     @JsonIgnore
     private Course course;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Tag> tags  = new HashSet<>();
 
     public Section() {
@@ -93,5 +94,20 @@ public class Section extends BaseEntity {
 
     public void setCourseId(String courseId) {
         this.courseId = courseId;
+    }
+
+    @Override
+    public String toString() {
+        return "Section{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", id='" + id + '\'' +
+                ", orderIndex=" + orderIndex +
+                ", status=" + status +
+                ", addTime=" + addTime +
+                ", courseId='" + courseId + '\'' +
+                ", course=" + course +
+                ", tags=" + tags +
+                '}';
     }
 }

@@ -22,5 +22,5 @@ public interface SectionService {
 
     WebResult update(Section section);
 
-    WebResult findByCourse(Course course);
+    Set<Section> findByCourse(Course course);
 }

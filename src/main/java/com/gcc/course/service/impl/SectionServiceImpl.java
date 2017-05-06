@@ -74,7 +74,7 @@ public class SectionServiceImpl implements SectionService {
     }
 
     @Override
-    public WebResult findByCourse(Course course){
-        return WebResult.ok(sectionRepository.findByCourse(course));
+    public Set<Section> findByCourse(Course course){
+        return sectionRepository.findByCourse(course);
     }
 }
