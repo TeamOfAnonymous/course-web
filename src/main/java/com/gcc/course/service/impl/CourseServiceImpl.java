@@ -3,11 +3,10 @@ package com.gcc.course.service.impl;
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
 import com.gcc.course.repository.CourseRepository;
-import com.gcc.course.repository.SectionRepository;
 import com.gcc.course.service.CourseService;
 import com.gcc.course.service.SectionService;
 import com.gcc.course.utils.PageUtil;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by huangMP on 2017/3/30.
@@ -40,12 +38,8 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult get(String id) {
         Course course = courseRepository.findOne(id);
-<<<<<<< Updated upstream
         course = insertSection(course) ;
         return WebResult.ok(course) ;
-=======
-        return WebResult.ok(course);
->>>>>>> Stashed changes
     }
 
     @Override
@@ -80,12 +74,8 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult findAll() {
         List<Course> courses = courseRepository.findAll();
-<<<<<<< Updated upstream
         courses = insertSection(courses);
         return WebResult.ok( courses ) ;
-=======
-        return WebResult.ok(courses);
->>>>>>> Stashed changes
     }
 
     @Override
@@ -93,13 +83,9 @@ public class CourseServiceImpl implements CourseService {
     public WebResult getPageList(int page, int rows) {
         Pageable pageable = new PageRequest(page, rows);
         Page<Course> result = courseRepository.findAll(pageable);
-<<<<<<< Updated upstream
         List<Course> courses = result.getContent();
         courses = insertSection(courses);
          return WebResult.ok(result);
-=======
-        return WebResult.ok(result);
->>>>>>> Stashed changes
     }
 
     @Override
@@ -115,7 +101,6 @@ public class CourseServiceImpl implements CourseService {
                 .withIgnorePaths("prompt")     // 忽略提示
                 .withIgnorePaths("sortOrder")     // 忽略排序数
                 .withIgnorePaths("description")    // 忽略描述
-<<<<<<< Updated upstream
                 .withIgnoreNullValues()
                 ;
         Example example = Example.of(course , matcher);
@@ -138,11 +123,6 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return courses;
-=======
-                .withIgnoreNullValues();
-        Example example = Example.of(course, matcher);
-        Page resultPage = courseRepository.findAll(example, new PageRequest(page, rows));
-        return WebResult.ok(resultPage);
     }
 
     //获取分页的课程列表
@@ -156,7 +136,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course findById(String id) {
         return courseRepository.findOne(id);
->>>>>>> Stashed changes
     }
 
 }
