@@ -31,12 +31,12 @@ public interface UserRepository extends JpaRepository<User, String> {
      * @param id
      * @param userName
      * @param password
-     * @param authority
+     * @param authorities
      */
     @Modifying
     @Transactional
-    @Query("update User u set u.userName = ?2,u.password = ?3,u.authority = ?4  where u.id = ?1")
-    void update(String id, String userName, String password, String authority);
+    @Query("update User u set u.userName = ?2,u.password = ?3,u.authorities = ?4  where u.id = ?1")
+    void update(String id, String userName, String password, String authorities);
 
     /**
      * 根据用户id修改删除时间和删除状态
@@ -48,4 +48,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Transactional
     @Query("update User u set u.deletedTime = ?2,u.status = ?3 where u.id = ?1")
     void update(String id, LocalDateTime deletedTime, int status);
+
+    User findByUserName(String username);
 }
