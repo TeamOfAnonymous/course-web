@@ -3,7 +3,7 @@ package com.gcc.course.web.controller.admin;
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Tag;
 import com.gcc.course.service.ArticleService;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

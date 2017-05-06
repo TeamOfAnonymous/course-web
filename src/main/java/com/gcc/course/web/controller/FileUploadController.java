@@ -1,7 +1,7 @@
 package com.gcc.course.web.controller;
 
 import com.gcc.course.service.FileUploadService;
-import com.gcc.course.utils.EditorImageResult;
+import com.gcc.course.web.dto.EditorImageResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

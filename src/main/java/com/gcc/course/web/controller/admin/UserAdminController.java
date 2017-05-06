@@ -2,7 +2,7 @@ package com.gcc.course.web.controller.admin;
 
 import com.gcc.course.domain.User;
 import com.gcc.course.service.UserService;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

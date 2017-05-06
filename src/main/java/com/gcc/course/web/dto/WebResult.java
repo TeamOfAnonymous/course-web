@@ -1,4 +1,4 @@
-package com.gcc.course.utils;
+package com.gcc.course.web.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

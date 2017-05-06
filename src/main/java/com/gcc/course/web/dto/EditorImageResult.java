@@ -1,4 +1,4 @@
-package com.gcc.course.utils;
+package com.gcc.course.web.dto;
 
 /**
  * Created by huangMP on 2017/3/13.

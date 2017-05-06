@@ -1,15 +1,12 @@
 package com.gcc.course.web.controller.admin;
 
-import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
 import com.gcc.course.service.SectionService;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Set;
 
 /**
  * Created by WangZK on 2017/3/20.
