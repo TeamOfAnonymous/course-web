@@ -2,6 +2,7 @@ package com.gcc.course.repository;
 
 import com.gcc.course.domain.Article;
 
+import com.gcc.course.domain.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by WangZK on 2017/3/12.
@@ -26,4 +28,6 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
 
 
     Page<Article> findByStatus(int status, Pageable pageable);
+
+    Page<Article> findByTags(Set<Tag> tags, Pageable pageable);
 }

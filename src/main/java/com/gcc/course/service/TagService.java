@@ -2,6 +2,7 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Tag;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -13,5 +14,6 @@ public interface TagService {
 
 	Tag findById(String id);
 
-
+	//获取所有的标签
+    List<Tag> getAll();
 }
