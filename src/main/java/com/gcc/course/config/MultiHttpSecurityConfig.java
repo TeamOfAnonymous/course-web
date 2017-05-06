@@ -30,7 +30,7 @@ public class MultiHttpSecurityConfig {
         // 静态资源访问的 url
         private String[] staticFileUrl = {"/css/**","/fonts/**","/img/**","/js/**","/url/**","/vendor/**"};
         // 不用认证就可访问的 url
-        private String[] permitUrl = {"/*","/authentication/auth","/goAdminLogin","/goHomePage"};
+        private String[] permitUrl = {"/","/authentication/auth","/goAdminLogin","/goHomePage"};
 
         @Override
         public void configure(WebSecurity web) throws Exception {
