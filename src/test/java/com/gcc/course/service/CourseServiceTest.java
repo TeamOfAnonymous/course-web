@@ -1,20 +1,15 @@
 package com.gcc.course.service;
 
-import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;
-import com.gcc.course.domain.Tag;
-import com.gcc.course.utils.WebResult;
-import com.gcc.course.web.CourseAdminController;
+import com.gcc.course.web.controller.admin.CourseAdminController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
