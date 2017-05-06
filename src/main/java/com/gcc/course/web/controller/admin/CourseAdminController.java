@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
  * Created by WangZK on 2017/3/20.
  */
 @RestController
-@RequestMapping("admin/course")
-@Api(value = "课程后台服务" , description = "提供课程的 增删改查 功能")
+@RequestMapping({"admin/course"})
+@Api(value = "后台-课程服务" , description = "提供课程的 增删改查 功能")
 public class CourseAdminController {
 
     @Autowired

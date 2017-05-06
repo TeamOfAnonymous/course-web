@@ -16,8 +16,8 @@ import java.util.List;
  * decription :
  */
 @RestController
-@RequestMapping({"course","api/course"})
-@Api(value = "课程的前台显示Controller")
+@RequestMapping({"course"})
+@Api(value = "前台-课程服务",description = "提供课程的相关查询功能")
 public class CourseController {
 
     @Autowired

@@ -17,8 +17,8 @@ import java.util.Set;
  * Created by WangZK on 2017/3/20.
  */
 @RestController
-@RequestMapping("admin/article")
-@Api(value = "文章的后台管理Controller")
+@RequestMapping({"admin/article"})
+@Api(value = "后台-文章的管理Controller")
 public class ArticleAdminController {
 
     @Autowired

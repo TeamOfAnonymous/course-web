@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("admin/tag")
-@Api(value = "标签的后台管理Controller")
+@Api(value = "后台-标签的管理Controller")
 public class TagAdminController {
 
     @Autowired

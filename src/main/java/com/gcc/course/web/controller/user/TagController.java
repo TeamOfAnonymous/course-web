@@ -16,8 +16,8 @@ import java.util.List;
  * Created by WangZK on 2017/3/12.
  */
 @RestController
-@RequestMapping(value = "/tag")
-@Api(value = "标签的前台Controller")
+@RequestMapping({"tag"})
+@Api(value = "前台-标签的Controller")
 public class TagController {
 
     @Autowired

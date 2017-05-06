@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
  * Created by WangZK on 2017/3/20.
  */
 @RestController
-@RequestMapping("admin/section")
-@Api(value = "章节的后台管理Controller")
+@RequestMapping({"admin/section"})
+@Api(value = "后台-章节的管理Controller")
 public class SectionAdminController {
 
     @Autowired
