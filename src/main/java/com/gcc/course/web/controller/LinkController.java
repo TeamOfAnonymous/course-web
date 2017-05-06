@@ -1,4 +1,4 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

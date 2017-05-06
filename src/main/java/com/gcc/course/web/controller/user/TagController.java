@@ -1,4 +1,4 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller.user;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Tag;

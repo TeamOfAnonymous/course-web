@@ -1,6 +1,5 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller.user;
 
-import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Course;
 import com.gcc.course.service.CourseService;
 import com.gcc.course.service.CourseService;
@@ -17,7 +16,7 @@ import java.util.List;
  * decription :
  */
 @RestController
-@RequestMapping("/course")
+@RequestMapping({"course","api/course"})
 @Api(value = "课程的前台显示Controller")
 public class CourseController {
 

@@ -1,4 +1,4 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller.admin;
 
 import com.gcc.course.domain.Course;
 import com.gcc.course.domain.Section;

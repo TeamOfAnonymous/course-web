@@ -1,4 +1,4 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller;
 
 import com.gcc.course.security.JwtAuthenticationRequest;
 import com.gcc.course.security.JwtAuthenticationResponse;

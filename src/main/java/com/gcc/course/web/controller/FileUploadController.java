@@ -1,4 +1,4 @@
-package com.gcc.course.web;
+package com.gcc.course.web.controller;
 
 import com.gcc.course.service.FileUploadService;
 import com.gcc.course.utils.EditorImageResult;
