@@ -2,18 +2,16 @@ package com.gcc.course.service;
 
 import com.gcc.course.domain.Article;
 import com.gcc.course.domain.Tag;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static org.apache.coyote.http11.Constants.a;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

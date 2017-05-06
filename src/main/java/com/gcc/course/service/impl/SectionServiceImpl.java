@@ -7,7 +7,7 @@ import com.gcc.course.repository.CourseRepository;
 import com.gcc.course.repository.SectionRepository;
 import com.gcc.course.repository.TagRepository;
 import com.gcc.course.service.SectionService;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

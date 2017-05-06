@@ -1,10 +1,6 @@
 package com.gcc.course.service;
 
-import com.gcc.course.domain.Course;
-import com.gcc.course.domain.Section;
-import com.gcc.course.domain.Tag;
-import com.gcc.course.repository.CourseRepository;
-import com.gcc.course.utils.WebResult;
+import com.gcc.course.web.dto.WebResult;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,8 @@
 package com.gcc.course.service;
 
 import com.gcc.course.domain.Course;
-import com.gcc.course.utils.WebResult;
+
+import com.gcc.course.web.dto.WebResult;
 import org.springframework.data.domain.Page;
 
 /**

@@ -1,7 +1,6 @@
 package com.gcc.course.service;
 
-import com.gcc.course.utils.EditorImageResult;
-import org.springframework.beans.factory.annotation.Value;
+import com.gcc.course.web.dto.EditorImageResult;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
