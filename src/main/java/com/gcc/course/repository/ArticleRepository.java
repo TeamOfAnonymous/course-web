@@ -26,8 +26,11 @@ public interface ArticleRepository extends JpaRepository<Article, String> {
     @Query("update Article a set a.status = ?1,a.deletedTime = ?2 where a.id = ?3")
     Integer uploadStatusAndDeletedTimeById(Integer status, LocalDateTime deletedTime, String id);
 
+    List<Article> findByStatus(int status);
 
     Page<Article> findByStatus(int status, Pageable pageable);
 
-    Page<Article> findByTags(Set<Tag> tags, Pageable pageable);
+    Page<Article> findByStateAndStatus(int state, int status, Pageable pageable);
+
+    Page<Article> findByTagsAndStateAndStatus(Set<Tag> tags, int state, int status, Pageable pageable);
 }

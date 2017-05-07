@@ -38,8 +38,8 @@ public class CourseServiceImpl implements CourseService {
     @Transactional
     public WebResult get(String id) {
         Course course = courseRepository.findOne(id);
-        course = insertSection(course) ;
-        return WebResult.ok(course) ;
+        course = insertSection(course);
+        return WebResult.ok(course);
     }
 
     @Override
@@ -73,19 +73,19 @@ public class CourseServiceImpl implements CourseService {
     @Override
     @Transactional
     public WebResult findAll() {
-        List<Course> courses = courseRepository.findAll();
+        List<Course> courses = courseRepository.findByStatus(0);
         courses = insertSection(courses);
-        return WebResult.ok( courses ) ;
+        return WebResult.ok(courses);
     }
 
     @Override
     @Transactional
     public WebResult getPageList(int page, int rows) {
         Pageable pageable = new PageRequest(page, rows);
-        Page<Course> result = courseRepository.findAll(pageable);
+        Page<Course> result = courseRepository.findByStatus(0, pageable);
         List<Course> courses = result.getContent();
         courses = insertSection(courses);
-         return WebResult.ok(result);
+        return WebResult.ok(result);
     }
 
     @Override
@@ -101,24 +101,23 @@ public class CourseServiceImpl implements CourseService {
                 .withIgnorePaths("prompt")     // 忽略提示
                 .withIgnorePaths("sortOrder")     // 忽略排序数
                 .withIgnorePaths("description")    // 忽略描述
-                .withIgnoreNullValues()
-                ;
-        Example example = Example.of(course , matcher);
-        Page resultPage = courseRepository.findAll(example, new PageRequest( page , rows ));
+                .withIgnoreNullValues();
+        Example example = Example.of(course, matcher);
+        Page resultPage = courseRepository.findAll(example, new PageRequest(page, rows));
         List<Course> courses = resultPage.getContent();
         courses = insertSection(courses);
         return WebResult.ok(resultPage);
     }
 
 
-    private Course insertSection(Course course){
-        course.setSections( sectionService.findByCourse(course) );
+    private Course insertSection(Course course) {
+        course.setSections(sectionService.findByCourse(course));
         return course;
     }
 
-    private List<Course> insertSection(List<Course> courses){
-        if( courses.size() > 0 ){
-            for(Course course : courses){
+    private List<Course> insertSection(List<Course> courses) {
+        if (courses.size() > 0) {
+            for (Course course : courses) {
                 insertSection(course);
             }
         }
@@ -128,7 +127,7 @@ public class CourseServiceImpl implements CourseService {
     //获取分页的课程列表
     public Page<Course> getCoursesForPage(Integer page, Integer size, String search) {
         Pageable pageable = PageUtil.basicPage(page, size);
-        Page<Course> courses = courseRepository.findAll(pageable);
+        Page<Course> courses = courseRepository.findByStatus(0, pageable);
         return courses;
     }
 

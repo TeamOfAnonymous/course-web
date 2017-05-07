@@ -1,6 +1,7 @@
 package com.gcc.course.repository;
 
 import com.gcc.course.domain.Course;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,4 +15,8 @@ import java.util.Set;
  */
 @Repository
 public interface CourseRepository extends JpaRepository<Course, String> {
+
+    List<Course> findByStatus(int status);
+
+    Page<Course> findByStatus(int status, Pageable pageable);
 }

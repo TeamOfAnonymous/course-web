@@ -105,7 +105,7 @@ public class ArticleServiceImpl implements ArticleService {
      */
     @Override
     public List<Article> get() {
-        return articleRepository.findAll();
+        return articleRepository.findByStatus(0);
     }
 
     /**
@@ -228,14 +228,14 @@ public class ArticleServiceImpl implements ArticleService {
         Set<Tag> tags = new HashSet<>();
         tags.add(tag);
         Pageable pageable = PageUtil.basicPage(page, size);
-        return articleRepository.findByTags(tags, pageable);
+        return articleRepository.findByTagsAndStateAndStatus(tags, 1, 0, pageable);
     }
 
     //获取分页的文章列表
     @Override
     public Page<Article> getArticlesForPage(Integer page, Integer size) {
         Pageable pageable = PageUtil.basicPage(page, size);
-        return articleRepository.findAll(pageable);
+        return articleRepository.findByStateAndStatus(1, 0, pageable);
     }
 
 }
