@@ -29,13 +29,23 @@ public class MultiHttpSecurityConfig {
         private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
         // 静态资源访问的 url
-        private String[] staticFileUrl = {"/css/**","/fonts/**","/img/**","**.js","/js/**","/url/**","/vendor/**"};
+        private String[] staticFileUrl = {
+                "/css/**","**.css",
+                "/fonts/**",
+                "/img/**",
+                "**.js","/js/**",
+                "/url/**",
+                "/vendor/**"};
         // 不用认证就可访问的 url
-        private String[] permitUrl = {"/","/authentication/auth","/goAdminLogin","/goHomePage"};
+        private String[] permitUrl = {"/",
+                "/authentication/auth",
+                "/goAdminLogin",
+                "/goHomePage"};
 
         @Override
         public void configure(WebSecurity web) throws Exception {
             web.ignoring().antMatchers(staticFileUrl);
+            web.ignoring().antMatchers(permitUrl);
         }
 
         @Override
@@ -45,14 +55,14 @@ public class MultiHttpSecurityConfig {
             // 访问url认证
             http
                     .authorizeRequests()
-                    .antMatchers(permitUrl).permitAll()
                     .antMatchers("/admin/**").hasAuthority(String.valueOf(AuthorityName.ROLE_ADMIN))
                     .anyRequest().authenticated();
 
 
-                    // 配置登陆信息
+            // 配置登陆信息
             http
                     .formLogin()
+                    .successForwardUrl("/goIndex")
                     .permitAll()
                     .and();
 
