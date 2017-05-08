@@ -34,6 +34,7 @@ public class MultiHttpSecurityConfig {
                 "/fonts/**",
                 "/img/**",
                 "**.js","/js/**",
+                "/showPage/**",
                 "/url/**",
                 "/vendor/**"};
         // 不用认证就可访问的 url
@@ -61,8 +62,8 @@ public class MultiHttpSecurityConfig {
 
             // 配置登陆信息
             http
-                    .formLogin()
-                    .successForwardUrl("/goIndex")
+                    .formLogin().loginPage("/login")
+                    .defaultSuccessUrl("/goIndex")
                     .permitAll()
                     .and();
 
