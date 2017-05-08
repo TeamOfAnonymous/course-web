@@ -31,6 +31,17 @@ public class FileUploadController {
         return mappingJacksonValue;
     }
 
+
+
+    @PostMapping("courseImage")
+    @ApiOperation(value = "上传单个图片")
+    public MappingJacksonValue courseImage(@RequestParam("file") MultipartFile multipartFile) {
+        EditorImageResult editorImageResult = fileUploadServiceImpl.imageUpload(multipartFile);
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(editorImageResult);
+        return mappingJacksonValue;
+    }
+
+
     @PostMapping("again")
     @ApiOperation(value = "再次上传单个图片")
     public MappingJacksonValue imageUploadAgain(@RequestParam("editormd-image-file") MultipartFile multipartFile) {

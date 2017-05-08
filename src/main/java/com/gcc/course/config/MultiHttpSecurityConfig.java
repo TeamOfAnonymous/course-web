@@ -41,7 +41,14 @@ public class MultiHttpSecurityConfig {
         private String[] permitUrl = {"/",
                 "/authentication/auth",
                 "/goAdminLogin",
-                "/goHomePage"};
+                "/goHomePage",
+                "/course/**",
+                "/section/**",
+                "/tag/**",
+                "/article/**",
+                "/goCourse/**",
+                "/goArticle/**",
+                "/goArticlesList/**"};
 
         @Override
         public void configure(WebSecurity web) throws Exception {
@@ -70,6 +77,7 @@ public class MultiHttpSecurityConfig {
             // 配置退出登陆信息
             http
                     .logout()
+                    .logoutSuccessUrl("/login")
                     .invalidateHttpSession(true)
                     .deleteCookies()
                     .and();
