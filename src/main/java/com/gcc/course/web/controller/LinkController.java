@@ -19,8 +19,14 @@ import javax.persistence.Id;
 public class LinkController {
 
     @ApiOperation(value = "跳转到后台登陆页面")
-    @GetMapping(value = "goAdminLogin")
+    @GetMapping(value = "login")
     public String goAdminLogin() {
+        return "login";
+    }
+
+    @ApiOperation(value = "跳转到后台页面")
+    @GetMapping(value = "goIndex")
+    public String goIndex() {
         return "index";
     }
 
